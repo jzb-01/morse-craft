@@ -1,0 +1,103 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<section class="code-page">
+
+  <div class="table-nav">
+
+    <span id="left" class="nav-button">
+      ← PREV
+    </span>
+
+    <h2 id="table-name" class="table-title">
+      LETTERS
+    </h2>
+
+    <span id="right" class="nav-button">
+      NEXT →
+    </span>
+
+  </div>
+
+
+  <div class="table-wrapper">
+
+    <table class="code-table">
+
+      <tbody id="code-table-body">
+
+        {% if letters_dict %}
+
+          {% for char, morse in letters_dict.items() %}
+
+          <tr>
+
+            <td class="character-cell">
+              {{ char }}
+            </td>
+
+            <td class="morse-cell">
+              {{ morse }}
+            </td>
+
+          </tr>
+
+          {% endfor %}
+
+        {% endif %}
+
+      </tbody>
+
+    </table>
+
+  </div>
+
+
+  <!-- FOOTER -->
+
+  <div class="code-footer">
+
+    <div class="footer-dashed"></div>
+
+    <div class="time-control">
+
+      <span class="time-label">
+        TIME UNIT
+      </span>
+
+      <input
+        type="range"
+        id="time-slider"
+        class="time-slider"
+        min="100"
+        max="1000"
+        value="200"
+        step="50"
+      >
+
+      <span id="time-unit-value" class="time-value">
+        200
+      </span>
+
+      <span class="time-unit-ms">
+        ms
+      </span>
+
+    </div>
+
+    <div class="table-note">
+      click any row to hear the morse code
+    </div>
+
+  </div>
+
+</section>
+
+{% endblock %}
+
+
+{% block links %}
+<link rel="stylesheet" href="/static/css/codebook.css">
+<script type="module" src="/static/js/codebook.js"></script>
+{% endblock %}

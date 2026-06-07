@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  />
+
+  <title>Morse-Craft · analog signals</title>
+
+  <link rel="stylesheet" href="/static/css/layout.css" />
+
+  {% block links %}{% endblock %}
+
+</head>
+
+<body>
+
+  <header class="top-bar">
+
+    <div class="site-title">
+      <h1>MORSE·CRAFT</h1>
+      <p>analog signals · graphic code</p>
+    </div>
+
+    <nav class="navigation">
+
+      <ul>
+
+        <li><a href="/">HOME</a></li>
+        <li><a href="/codebook">CODEBOOK</a></li>
+        <li><a href="/archive">ARCHIVES</a></li>
+        <li><a href="/notes">NOTES</a></li>
+        <li><a href="/blackbox">BLACKBOX</a></li>
+        <li>
+          {% if session.get("user_id") %}
+
+            <a href="/account">
+              ACCOUNT
+            </a>
+
+            {% else %}
+
+            <a href="/auth">
+              LOG IN
+            </a>
+
+          {% endif %}
+        </li>
+
+        <li class="dropdown">
+
+          <button class="dropdown-button">
+            TOOLS ▼
+          </button>
+
+          <div class="dropdown-content">
+            <a href="/translator">TRANSLATOR</a>
+            <a href="/telegraph">TELEGRAPH</a>
+            <a href="/training">TRAINING</a>
+          </div>
+
+        </li>
+
+      </ul>
+
+    </nav>
+
+  </header>
+
+
+  <main class="main-area">
+
+    <section class="card">
+      {% block content %}{% endblock %}
+    </section>
+
+  </main>
+
+</body>
+
+</html>

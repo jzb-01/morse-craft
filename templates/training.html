@@ -1,0 +1,186 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<section class="training-page">
+
+  <div class="training-container">
+
+    <!-- CONFIGURATION -->
+
+    <div class="training-config">
+
+      <div class="character-groups">
+
+        <label class="group-option">
+          <input type="checkbox" id="letters" checked>
+          <span>LETTERS</span>
+        </label>
+
+        <label class="group-option">
+          <input type="checkbox" id="numbers" checked>
+          <span>NUMBERS</span>
+        </label>
+
+        <label class="group-option">
+          <input type="checkbox" id="symbols">
+          <span>SYMBOLS</span>
+        </label>
+
+      </div>
+
+      <div class="length-control">
+
+        <label for="exerciseLength">
+          TEXT LENGTH
+        </label>
+
+        <select id="exerciseLength">
+          <option>10</option>
+          <option selected>25</option>
+          <option>50</option>
+          <option>100</option>
+        </select>
+
+      </div>
+
+    </div>
+
+
+    <!-- TRAINING STATUS -->
+
+    <div class="training-info">
+
+    <div class="info-block characters-block">
+
+        <div class="info-label">
+        AVAILABLE CHARACTERS
+        </div>
+
+        <div id="availableCharacters" class="info-value characters-display">
+        K M
+        </div>
+
+    </div>
+
+    <div class="info-block small-info-block">
+
+        <div class="info-label">
+        CURRENT LESSON
+        </div>
+
+        <div id="currentLesson" class="info-value">
+        1
+        </div>
+
+    </div>
+
+    <div class="info-block small-info-block">
+
+        <div class="info-label">
+        LAST RESULT
+        </div>
+
+        <div id="lastResult" class="info-value">
+        —
+        </div>
+
+    </div>
+
+    </div>
+
+
+    <!-- USER INPUT -->
+
+    <textarea
+      id="userCopy"
+      class="training-input"
+      placeholder="Type the transmission as you hear it..."
+    ></textarea>
+
+
+    <!-- EVALUATION PANEL -->
+
+    <div class="evaluation-panel">
+
+      <div class="evaluation-column">
+
+        <div class="evaluation-label">
+          EXPECTED
+        </div>
+
+        <div id="expectedText" class="evaluation-box">
+          —
+        </div>
+
+      </div>
+
+      <div class="evaluation-column small-column">
+
+        <div class="evaluation-label">
+          ACCURACY
+        </div>
+
+        <div id="accuracyValue" class="evaluation-box">
+          —
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- FOOTER -->
+
+    <div class="training-footer">
+
+      <div class="footer-dashed"></div>
+
+      <div class="footer-controls">
+
+        <button id="startButton" class="control-button">
+          START
+        </button>
+
+        <button id="stopButton" class="control-button">
+          STOP
+        </button>
+
+        <button id="evaluateButton" class="control-button">
+          EVALUATE
+        </button>
+
+        <span class="time-label">
+          TIME UNIT
+        </span>
+
+        <input
+          type="range"
+          id="timeSlider"
+          class="time-slider"
+          min="100"
+          max="1000"
+          value="200"
+          step="50"
+        >
+
+        <span id="timeValue" class="time-value">
+          200
+        </span>
+
+        <span class="time-unit-ms">
+          ms
+        </span>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+{% endblock %}
+
+{% block links %}
+<link rel="stylesheet" href="/static/css/training.css">
+<script type="module" src="/static/js/training.js"></script>
+{% endblock %}

@@ -1,0 +1,208 @@
+.account-page {
+  display: flex;
+  flex-direction: column;
+
+  gap: 1.5rem;
+}
+
+
+/* HEADER */
+
+.account-header {
+  display: flex;
+  flex-direction: column;
+
+  gap: 0.3rem;
+}
+
+
+.account-title {
+  font-family: "DM Serif Display", serif;
+
+  font-size: 2.2rem;
+}
+
+
+.account-subtitle {
+  font-family: "Courier New", monospace;
+
+  font-size: 0.75rem;
+
+  text-transform: uppercase;
+  letter-spacing: 1px;
+
+  color: #555555;
+}
+
+
+/* MAIN */
+
+.profile-body {
+
+  border-top: 2px solid #111111;
+  border-bottom: 2px solid #111111;
+
+  padding: 2rem 0;
+
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+
+  gap: 1.5rem;
+}
+
+
+/* DECORATION */
+
+.profile-symbol {
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+
+  gap: 0.5rem;
+}
+
+
+.symbol-circle {
+  width: 70px;
+  height: 70px;
+
+  border: 2px solid #111111;
+
+  border-radius: 50%;
+}
+
+
+.symbol-line {
+  width: 120px;
+  height: 1px;
+
+  background: #111111;
+}
+
+
+/* PROFILE */
+
+.profile-name {
+  font-family: "DM Serif Display", serif;
+
+  font-size: 2.2rem;
+}
+
+
+.profile-id,
+.profile-email {
+  font-family: "Courier New", monospace;
+
+  color: #555555;
+}
+
+
+.profile-divider {
+  width: 100%;
+
+  border-top: 1px solid rgba(17,17,17,.12);
+}
+
+
+/* STATS */
+
+.stats-row {
+  width: 100%;
+
+  display: flex;
+
+  justify-content: center;
+
+  gap: 5rem;
+}
+
+
+.stat {
+  text-align: center;
+}
+
+
+.stat-value {
+  font-family: "DM Serif Display", serif;
+
+  font-size: 2rem;
+}
+
+
+.stat-label {
+  margin-top: .3rem;
+
+  font-family: "Courier New", monospace;
+
+  font-size: .75rem;
+
+  letter-spacing: 1px;
+
+  color: #555555;
+}
+
+
+/* RECORD */
+
+.record-block {
+  width: min(700px, 90%);
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 1rem;
+}
+
+
+.record-line {
+  display: flex;
+
+  justify-content: space-between;
+
+  font-family: "Courier New", monospace;
+
+  font-size: .9rem;
+}
+
+
+.record-line span:first-child {
+  color: #555555;
+}
+
+
+.account-controls {
+  display: flex;
+
+  justify-content: center;
+
+  width: 100%;
+}
+
+
+.logout-link {
+  text-decoration: none;
+
+  font-family: "Courier New", monospace;
+
+  font-size: 0.85rem;
+
+  letter-spacing: 1px;
+
+  text-transform: uppercase;
+
+  color: #111111;
+
+  padding: 0.4rem 0;
+
+  border-bottom: 1px solid transparent;
+
+  transition: border-color 0.15s ease;
+}
+
+
+.logout-link:hover {
+  border-bottom-color: #111111;
+}

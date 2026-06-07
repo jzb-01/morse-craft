@@ -1,0 +1,306 @@
+/* ---------- PAGE ---------- */
+
+.training-page {
+  height: 100%;
+}
+
+
+/* ---------- CONTAINER ---------- */
+
+.training-container {
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 1rem;
+}
+
+
+/* ---------- CONFIG ---------- */
+
+.training-config {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  gap: 2rem;
+}
+
+
+/* ---------- CHARACTER GROUPS ---------- */
+
+.character-groups {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.group-option {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+
+  cursor: pointer;
+
+  font-family: "Courier New", monospace;
+  font-size: 0.85rem;
+  letter-spacing: 1px;
+}
+
+.group-option input {
+  accent-color: #111111;
+}
+
+
+/* ---------- LENGTH ---------- */
+
+.length-control {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+
+  font-family: "Courier New", monospace;
+  font-size: 0.85rem;
+}
+
+.length-control select {
+  background-color: #FEF7E6;
+  border: 1px solid #111111;
+
+  padding: 0.25rem 0.5rem;
+
+  font-family: inherit;
+}
+
+
+/* ---------- TRAINING INFO ---------- */
+
+.training-info {
+  display: flex;
+  gap: 1rem;
+}
+
+.characters-block {
+  flex: 1;
+}
+
+.small-info-block {
+  width: 170px;
+  flex-shrink: 0;
+}
+
+.info-block {
+  border: 2px solid #111111;
+
+  padding: 0.75rem;
+
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.info-label {
+  font-family: "Courier New", monospace;
+  font-size: 0.75rem;
+
+  text-transform: uppercase;
+  letter-spacing: 1px;
+
+  color: #555555;
+}
+
+.info-value {
+  font-family: "DM Serif Display", serif;
+  font-size: 1.2rem;
+
+  color: #111111;
+}
+
+.characters-display {
+  letter-spacing: 4px;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ---------- INPUT ---------- */
+
+.training-input {
+  flex: 1;
+
+  min-height: 0;
+
+  resize: none;
+
+  background: transparent;
+  border: 2px solid #111111;
+
+  padding: 1.5rem;
+
+  outline: none;
+
+  font-family: "Courier New", monospace;
+  font-size: 1.3rem;
+  line-height: 1.7;
+
+  color: #111111;
+}
+
+.training-input::placeholder {
+  color: #999999;
+}
+
+
+/* ---------- EVALUATION ---------- */
+
+.evaluation-panel {
+  display: flex;
+  gap: 1rem;
+}
+
+.evaluation-column {
+  flex: 1;
+
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.small-column {
+  flex: 0.35;
+}
+
+.evaluation-label {
+  font-family: "Courier New", monospace;
+  font-size: 0.75rem;
+
+  text-transform: uppercase;
+  letter-spacing: 1px;
+
+  color: #555555;
+}
+
+.evaluation-box {
+  min-height: 70px;
+
+  padding: 0.75rem;
+
+  border: 1px solid #111111;
+
+  font-family: "Courier New", monospace;
+  font-size: 0.95rem;
+
+  overflow-wrap: break-word;
+}
+
+
+/* ---------- FOOTER ---------- */
+
+.training-footer {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+
+/* ---------- DIVIDER ---------- */
+
+.footer-dashed {
+  width: 100%;
+  border-top: 1px dashed rgba(17, 17, 17, 0.45);
+}
+
+
+/* ---------- CONTROLS ---------- */
+
+.footer-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  flex-wrap: wrap;
+  gap: 1rem;
+
+  padding-bottom: 0.5rem;
+
+  font-family: "Courier New", monospace;
+  font-size: 0.85rem;
+  font-weight: 700;
+
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+
+/* ---------- BUTTONS ---------- */
+
+.control-button {
+  background-color: #FEF7E6;
+  border: 2px solid #111111;
+
+  padding: 0.45rem 0.9rem;
+
+  cursor: pointer;
+
+  font-family: inherit;
+  font-size: inherit;
+}
+
+.control-button:hover {
+  background-color: rgba(17, 17, 17, 0.05);
+}
+
+.control-button:active {
+  transform: translateY(1px);
+}
+
+
+/* ---------- SLIDER ---------- */
+
+.time-label,
+.time-unit-ms {
+  color: #555555;
+}
+
+.time-slider {
+  width: 280px;
+  height: 2px;
+
+  appearance: none;
+
+  background-color: #111111;
+
+  cursor: pointer;
+  outline: none;
+}
+
+.time-slider::-webkit-slider-thumb {
+  appearance: none;
+
+  width: 12px;
+  height: 12px;
+
+  background-color: #111111;
+
+  cursor: pointer;
+}
+
+.time-slider::-moz-range-thumb {
+  width: 12px;
+  height: 12px;
+
+  border: none;
+
+  background-color: #111111;
+
+  cursor: pointer;
+}
+
+
+/* ---------- VALUE ---------- */
+
+.time-value {
+  min-width: 40px;
+  text-align: center;
+}

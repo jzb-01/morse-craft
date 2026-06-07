@@ -1,0 +1,58 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<section class="telegraph-page">
+
+  <div class="telegraph-container">
+
+    <!-- OUTPUT (now dominant area) -->
+    <div id="telegraphOutput" class="telegraph-output"></div>
+
+    <!-- TELEGRAPH KEY (now smaller + styled) -->
+    <div class="telegraph-key" id="telegraphKey"></div>
+
+    <!-- FOOTER -->
+    <div class="telegraph-footer">
+
+      <div class="footer-dashed"></div>
+
+      <div class="time-unit-control">
+        <button id="playButton" class="footer-button">▶</button>
+
+        <span class="time-label">TIME UNIT</span>
+
+        <input
+          type="range"
+          id="timeSlider"
+          class="time-slider"
+          min="100"
+          max="1000"
+          value="200"
+          step="50"
+        >
+
+        <span id="timeValue" class="time-value">200</span>
+        <span class="time-unit-ms">ms</span>
+        <button id="clearButton" class="footer-button">⌫</button>
+        {% if logged_in %}
+          <button id="saveNoteButton" class="footer-button">
+            ✎
+          </button>
+
+          <button id="commentButton" class="footer-button">
+            ✉
+          </button>
+        {% endif %}
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+{% endblock %}
+
+{% block links %}
+<link rel="stylesheet" href="/static/css/telegraph.css">
+<script type="module" src="/static/js/telegraph.js"></script>
+{% endblock %}

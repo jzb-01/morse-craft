@@ -1,0 +1,182 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+{% if session.get("user_id") %}
+
+<section class="archives-page">
+
+  <!-- ===================== -->
+  <!-- TABLE VIEW            -->
+  <!-- ===================== -->
+
+  <div class="archives-browser" id="archivesBrowser">
+
+    <div class="archives-header">
+      <h2 class="archives-title">PRIVATE NOTES</h2>
+      <p class="archives-subtitle">
+        personal transmissions · encrypted thoughts · stored records
+      </p>
+    </div>
+
+    <div class="archives-table-wrapper">
+
+      <table class="archives-table">
+
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>PREVIEW</th>
+            <th>DATE</th>
+            <th>CHARS</th>
+          </tr>
+        </thead>
+
+        <tbody>
+
+          {% for note in notes %}
+
+          <tr
+            class="archive-row"
+            data-id="{{ note.id }}"
+          >
+            <td class="entry-title">
+              {{ note.id }}
+            </td>
+
+            <td class="entry-preview">
+              {{ note.content[:80] }}...
+            </td>
+
+            <td class="entry-meta">
+              {{ note.created_at.strftime("%Y-%m-%d") }}
+            </td>
+
+            <td class="entry-meta">
+              {{ note.length }}
+            </td>
+
+          </tr>
+
+          {% endfor %}
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+    <div class="archives-footer">
+      ✦ click any row to open the full note ✦
+    </div>
+
+  </div>
+
+
+  <!-- ===================== -->
+  <!-- READER VIEW           -->
+  <!-- ===================== -->
+
+  <div class="archive-reader hidden" id="archiveReader">
+
+    <div class="reader-header">
+
+      <button
+        type="button"
+        class="reader-back-button"
+        id="readerBackButton"
+      >
+        ← BACK
+      </button>
+
+      <h2
+        class="reader-title"
+        id="readerTitle"
+      >
+        NOTE
+      </h2>
+
+    </div>
+
+    <div
+      class="reader-content"
+      id="readerContent"
+    >
+      Note content appears here.
+    </div>
+
+    <div class="reader-footer">
+
+      <div class="footer-dashed"></div>
+
+      <div class="time-unit-control">
+
+        <button
+          id="playButton"
+          class="play-button"
+        >
+          ▶
+        </button>
+
+        <span class="time-label">
+          TIME UNIT
+        </span>
+
+        <input
+          type="range"
+          id="timeSlider"
+          class="time-slider"
+          min="100"
+          max="1000"
+          value="200"
+          step="50"
+        >
+
+        <span
+          id="timeValue"
+          class="time-value"
+        >
+          200
+        </span>
+
+        <span class="time-unit-ms">
+          ms
+        </span>
+        
+        <button id="deleteButton" class="play-button">
+          🗑
+        </button>        
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+{% else %}
+
+<section class="notes-locked">
+
+  <div class="locked-content">
+
+    <h2>PRIVATE NOTES</h2>
+
+    <p>
+      log in to access personal transmissions
+    </p>
+
+  </div>
+
+</section>
+
+{% endif %}
+
+{% endblock %}
+
+
+{% block links %}
+<link rel="stylesheet" href="/static/css/notes.css">
+<script type="module" src="/static/js/notes.js"></script>
+{% endblock %}

@@ -1,0 +1,221 @@
+/* ---------- PAGE LAYOUT ---------- */
+
+.code-page {
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 1.5rem;
+}
+
+
+/* ---------- TABLE NAV ---------- */
+
+.table-nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  gap: 3rem;
+}
+
+
+.nav-button {
+  cursor: pointer;
+
+  font-size: 1.1rem;
+  font-weight: 600;
+
+  font-family: "DM Serif Display", serif;
+}
+
+
+.nav-button:hover {
+  opacity: 0.7;
+}
+
+
+.table-title {
+  font-size: 2rem;
+
+  font-family: "DM Serif Display", serif;
+}
+
+
+/* ---------- TABLE AREA ---------- */
+
+.table-wrapper {
+  flex: 1;
+
+  min-height: 0;
+
+  overflow-y: auto;
+
+  border-top: 2px solid #111111;
+  border-bottom: 2px solid #111111;
+
+  background-image: linear-gradient(#111111, #111111);
+  background-size: 2px 92%;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+
+
+/* ---------- TABLE ---------- */
+
+.code-table {
+  width: 100%;
+
+  border-collapse: collapse;
+}
+
+
+.code-table tr {
+  cursor: pointer;
+}
+
+
+.code-table tr:hover {
+  background-color: rgba(17, 17, 17, 0.06);
+}
+
+
+.code-table td {
+  width: 50%;
+
+  padding: 1rem;
+
+  text-align: center;
+}
+
+
+/* ---------- CHARACTER COLUMN ---------- */
+
+.character-cell {
+  font-size: 2rem;
+  font-weight: 700;
+
+  font-family: "DM Serif Display", serif;
+
+  color: #111111;
+}
+
+
+/* ---------- MORSE COLUMN ---------- */
+
+.morse-cell {
+  font-size: 1.1rem;
+
+  font-family: "Courier New", monospace;
+
+  color: #111111;
+}
+
+
+/* ---------- FOOTER ---------- */
+
+.code-footer {
+  display: flex;
+  flex-direction: column;
+
+  gap: 1.2rem;
+}
+
+
+/* ---------- DASHED DIVIDER ---------- */
+
+.footer-dashed {
+  width: 100%;
+
+  border-top: 1px dashed rgba(17, 17, 17, 0.4);
+}
+
+
+/* ---------- TIME CONTROL ---------- */
+
+.time-control {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  gap: 1rem;
+
+  font-family: "Courier New", monospace;
+  font-size: 0.85rem;
+  font-weight: 700;
+
+  text-transform: uppercase;
+  letter-spacing: 1px;
+
+  color: #111111;
+}
+
+
+.time-label,
+.time-unit-ms {
+  color: #555555;
+}
+
+
+/* ---------- SLIDER ---------- */
+
+.time-slider {
+  width: 280px;
+  height: 2px;
+
+  appearance: none;
+
+  background-color: #111111;
+
+  cursor: pointer;
+  outline: none;
+}
+
+
+.time-slider::-webkit-slider-thumb {
+  appearance: none;
+
+  width: 12px;
+  height: 12px;
+
+  background-color: #111111;
+  border: none;
+
+  cursor: pointer;
+}
+
+
+.time-slider::-moz-range-thumb {
+  width: 12px;
+  height: 12px;
+
+  background-color: #111111;
+  border: none;
+
+  cursor: pointer;
+}
+
+
+/* ---------- VALUE ---------- */
+
+.time-value {
+  min-width: 40px;
+
+  text-align: center;
+}
+
+
+/* ---------- NOTE ---------- */
+
+.table-note {
+  text-align: center;
+
+  font-family: "Courier New", monospace;
+  font-size: 0.75rem;
+
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+
+  color: #555555;
+}

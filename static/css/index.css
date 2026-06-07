@@ -1,0 +1,168 @@
+/* ---------- PAGE ---------- */
+
+.index-page {
+  display: flex;
+  flex-direction: column;
+
+  gap: 2.5rem;
+}
+
+
+/* ---------- HEADER ---------- */
+
+.home-header {
+  text-align: center;
+}
+
+
+.home-mark {
+  margin-bottom: 1rem;
+
+  font-family: "Courier New", monospace;
+  font-size: 1rem;
+
+  letter-spacing: 4px;
+
+  color: #555555;
+}
+
+
+.home-title {
+  margin-bottom: 0.75rem;
+
+  font-family: "DM Serif Display", serif;
+  font-size: 4.2rem;
+  font-weight: 700;
+
+  line-height: 1;
+}
+
+
+.home-subtitle {
+  max-width: 55rem;
+
+  margin: 0 auto;
+
+  font-family: "Courier New", monospace;
+  font-size: 0.95rem;
+
+  text-transform: uppercase;
+  letter-spacing: 1px;
+
+  color: #555555;
+}
+
+
+.home-divider {
+  width: 100%;
+
+  margin: 2rem 0;
+
+  border-top: 2px solid #111111;
+}
+
+
+.home-description {
+
+  padding-top: 2rem;
+  max-width: 75ch;
+
+  margin: 0 auto;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 1.25rem;
+}
+
+
+.home-description p {
+  font-size: 1.05rem;
+  line-height: 1.8;
+
+  color: #222222;
+}
+
+
+/* ---------- REFERENCE ---------- */
+
+.reference-panel {
+  border-top: 2px solid #111111;
+
+  padding-top: 1.5rem;
+}
+
+
+.reference-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  margin-bottom: 1.5rem;
+}
+
+
+.reference-title {
+  font-family: "DM Serif Display", serif;
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+
+.reference-note {
+  font-family: "Courier New", monospace;
+  font-size: 0.85rem;
+
+  text-transform: uppercase;
+  letter-spacing: 1px;
+
+  color: #555555;
+}
+
+
+/* ---------- GRID ---------- */
+
+.morse-grid {
+  display: grid;
+
+  grid-template-columns: repeat(4, 1fr);
+
+  gap: 1rem 2rem;
+}
+
+
+.morse-item {
+  display: flex;
+  justify-content: space-between;
+
+  padding-bottom: 0.5rem;
+
+  border-bottom: 1px dashed rgba(17, 17, 17, 0.3);
+}
+
+
+.morse-letter {
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+
+.morse-code {
+  font-family: "Courier New", monospace;
+  font-size: 1rem;
+}
+
+
+/* ---------- MOBILE ---------- */
+
+@media (max-width: 900px) {
+
+  .home-title {
+    font-size: 3rem;
+  }
+
+  .morse-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+}

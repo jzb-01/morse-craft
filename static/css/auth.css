@@ -1,0 +1,193 @@
+/* ---------- PAGE ---------- */
+
+.auth-page {
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 1.5rem;
+}
+
+
+/* ---------- HEADER ---------- */
+
+.auth-header {
+  display: flex;
+  flex-direction: column;
+
+  gap: 0.3rem;
+}
+
+
+.auth-title {
+  font-family: "DM Serif Display", serif;
+
+  font-size: 2.2rem;
+  font-weight: 700;
+
+  color: #111111;
+}
+
+
+.auth-subtitle {
+  font-family: "Courier New", monospace;
+
+  font-size: 0.75rem;
+
+  text-transform: uppercase;
+  letter-spacing: 1px;
+
+  color: #555555;
+}
+
+
+/* ---------- MAIN AREA ---------- */
+
+.auth-container {
+  flex: 1;
+
+  display: flex;
+
+  min-height: 0;
+}
+
+
+/* ---------- PANELS ---------- */
+
+.auth-panel {
+  flex: 1;
+
+  display: flex;
+  flex-direction: column;
+
+  justify-content: center;
+
+  padding: 2rem 3rem;
+}
+
+
+/* ---------- CENTER DIVIDER ---------- */
+
+.auth-divider {
+  width: 2px;
+
+  background-color: #111111;
+
+  margin: 2rem 0;
+}
+
+
+/* ---------- TITLES ---------- */
+
+.panel-title {
+  margin-bottom: 2rem;
+
+  text-align: center;
+
+  font-family: "DM Serif Display", serif;
+
+  font-size: 1.8rem;
+  font-weight: 700;
+
+  color: #111111;
+}
+
+
+/* ---------- FORM ---------- */
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+
+  gap: 0.8rem;
+}
+
+
+/* ---------- LABELS ---------- */
+
+.auth-form label {
+  margin-top: 0.5rem;
+
+  font-family: "Courier New", monospace;
+
+  font-size: 0.8rem;
+
+  letter-spacing: 1px;
+
+  color: #555555;
+}
+
+
+/* ---------- INPUTS ---------- */
+
+.auth-form input {
+  background: transparent;
+
+  border: none;
+  border-bottom: 1px solid #111111;
+
+  padding: 0.7rem 0;
+
+  font-family: "Courier New", monospace;
+
+  font-size: 0.95rem;
+
+  color: #111111;
+}
+
+
+.auth-form input:focus {
+  outline: none;
+}
+
+
+/* ---------- BUTTONS ---------- */
+
+.auth-form button {
+  margin-top: 1.5rem;
+
+  background: none;
+
+  border: 1px solid #111111;
+
+  padding: 0.8rem;
+
+  cursor: pointer;
+
+  font-family: "Courier New", monospace;
+
+  font-size: 0.85rem;
+
+  font-weight: 700;
+
+  letter-spacing: 1px;
+
+  transition: background-color 0.15s;
+}
+
+
+.auth-form button:hover {
+  background-color: rgba(17, 17, 17, 0.06);
+}
+
+
+/* ---------- FOOTER ---------- */
+
+.auth-footer {
+  padding-top: 1rem;
+
+  border-top: 1px dashed rgba(17, 17, 17, 0.4);
+
+  text-align: center;
+
+  font-family: "Courier New", monospace;
+
+  font-size: 0.75rem;
+
+  letter-spacing: 1.5px;
+
+  text-transform: uppercase;
+
+  color: #555555;
+}

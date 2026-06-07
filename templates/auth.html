@@ -1,0 +1,144 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Authentication
+{% endblock %}
+
+{% block content %}
+
+<section class="auth-page">
+
+  <div class="auth-header">
+
+    <h2 class="auth-title">
+      OPERATOR AUTHENTICATION
+    </h2>
+
+    <p class="auth-subtitle">
+      access existing credentials or register a new operator
+    </p>
+
+  </div>
+
+
+  <div class="auth-container">
+
+    <!-- LOGIN -->
+
+    <section class="auth-panel">
+
+      <h3 class="panel-title">
+        SIGN IN
+      </h3>
+
+      <form
+        action="/login"
+        method="post"
+        class="auth-form"
+      >
+
+        <label>
+          USERNAME
+        </label>
+
+        <input
+          type="text"
+          name="username"
+          autocomplete="username"
+          required
+        >
+
+        <label>
+          PASSWORD
+        </label>
+
+        <input
+          type="password"
+          name="password"
+          autocomplete="current-password"
+          required
+        >
+
+        <button type="submit">
+          LOGIN
+        </button>
+
+      </form>
+
+    </section>
+
+
+    <!-- DIVIDER -->
+
+    <div class="auth-divider"></div>
+
+
+    <!-- REGISTER -->
+
+    <section class="auth-panel">
+
+      <h3 class="panel-title">
+        REGISTER
+      </h3>
+
+      <form
+        action="/register"
+        method="post"
+        class="auth-form"
+      >
+
+        <label>
+          USERNAME
+        </label>
+
+        <input
+          type="text"
+          name="username"
+          required
+        >
+
+        <label>
+          EMAIL
+        </label>
+
+        <input
+          type="email"
+          name="email"
+          required
+        >
+
+        <label>
+          PASSWORD
+        </label>
+
+        <input
+          type="password"
+          name="password"
+          required
+        >
+
+        <button type="submit">
+          CREATE ACCOUNT
+        </button>
+
+      </form>
+
+    </section>
+
+  </div>
+
+
+  <div class="auth-footer">
+
+    ✦ all transmissions are stored under your operator profile ✦
+
+  </div>
+
+</section>
+
+{% endblock %}
+
+
+{% block links %}
+<link rel="stylesheet" href="/static/css/auth.css">
+{% endblock %}

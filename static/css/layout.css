@@ -1,0 +1,164 @@
+/* ---------- RESET ---------- */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+
+/* ---------- BODY ---------- */
+
+body {
+  min-height: 100vh;
+
+  display: flex;
+  flex-direction: column;
+
+  background-color: #C95E2C;
+}
+
+
+/* ---------- TOP BAR ---------- */
+
+.top-bar {
+  margin: 2rem 2rem 0 2rem;
+  padding-bottom: 1rem;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  border-bottom: 2px solid #111111;
+}
+
+
+/* ---------- TITLE ---------- */
+
+.site-title h1 {
+  font-size: 2.8rem;
+  line-height: 1;
+
+  font-family:
+    "DM Serif Display",
+    serif;
+}
+
+
+.site-title p {
+  margin-top: 0.3rem;
+
+  font-size: 0.75rem;
+
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+
+/* ---------- NAVIGATION ---------- */
+
+.navigation ul {
+  display: flex;
+  gap: 1.5rem;
+
+  list-style: none;
+}
+
+
+.navigation a,
+.dropdown-button {
+  background: none;
+
+  border: none;
+  border-bottom: 2px solid transparent;
+
+  color: inherit;
+
+  cursor: pointer;
+  text-decoration: none;
+
+  font-size: 1.4rem;
+  font-weight: 600;
+
+  font-family:
+    "DM Serif Display",
+    serif;
+}
+
+
+.navigation a:hover,
+.dropdown-button:hover {
+  border-bottom-color: #111111;
+}
+
+
+/* ---------- DROPDOWN ---------- */
+
+.dropdown {
+  position: relative;
+  padding-bottom: 0.4rem;
+}
+
+
+.dropdown-content {
+  display: none;
+
+  position: absolute;
+  top: 100%;
+  right: 0;
+
+  min-width: 190px;
+  margin-top: 0;
+
+  background-color: #FEF7E6;
+  border: 2px solid #111111;
+
+  z-index: 1000;
+}
+
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+
+.dropdown-content a {
+  display: block;
+
+  padding: 0.7rem 1rem;
+}
+
+
+.dropdown-content a:hover {
+  background-color: #111111;
+  color: #FEF7E6;
+}
+
+
+/* ---------- MAIN AREA ---------- */
+
+.main-area {
+  flex: 1;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 0;
+}
+
+
+/* ---------- CARD ---------- */
+
+.card {
+  width: 90%;
+  height: 80vh;
+
+  padding: 2rem;
+
+  background-color: #FEF7E6;
+  border: 2px solid #111111;
+  overflow: hidden;
+  
+  display: flex;
+  flex-direction: column;
+}

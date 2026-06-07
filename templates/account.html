@@ -1,0 +1,145 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Account
+{% endblock %}
+
+{% block content %}
+
+<section class="account-page">
+
+  <div class="account-header">
+
+    <h2 class="account-title">
+      OPERATOR PROFILE
+    </h2>
+
+    <p class="account-subtitle">
+      authenticated personnel record
+    </p>
+
+  </div>
+
+
+  <div class="profile-body">
+
+    <div class="profile-symbol">
+
+      <div class="symbol-circle"></div>
+
+      <div class="symbol-line"></div>
+
+      <div class="symbol-line"></div>
+
+    </div>
+
+
+    <h3 class="profile-name">
+      {{ user.username }}
+    </h3>
+
+    <div class="profile-id">
+      operator #{{ user.id }}
+    </div>
+
+    <div class="profile-email">
+      {{ user.email }}
+    </div>
+
+
+    <div class="profile-divider"></div>
+
+
+    <div class="stats-row">
+
+      <div class="stat">
+
+        <div class="stat-value">
+          {{ notes_count }}
+        </div>
+
+        <div class="stat-label">
+          NOTES
+        </div>
+
+      </div>
+
+      <div class="stat">
+
+        <div class="stat-value">
+          {{ comments_count }}
+        </div>
+
+        <div class="stat-label">
+          COMMENTS
+        </div>
+
+      </div>
+
+      <div class="stat">
+
+        <div class="stat-value">
+          {{ user.created_at.strftime("%Y") }}
+        </div>
+
+        <div class="stat-label">
+          JOINED
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div class="profile-divider"></div>
+
+
+    <div class="record-block">
+
+      <div class="record-line">
+        <span>USERNAME</span>
+        <span>{{ user.username }}</span>
+      </div>
+
+      <div class="record-line">
+        <span>EMAIL</span>
+        <span>{{ user.email }}</span>
+      </div>
+
+      <div class="record-line">
+        <span>USER ID</span>
+        <span>#{{ user.id }}</span>
+      </div>
+
+      <div class="record-line">
+        <span>NOTES STORED</span>
+        <span>{{ notes_count }}</span>
+      </div>
+
+      <div class="record-line">
+        <span>COMMENTS SENT</span>
+        <span>{{ comments_count }}</span>
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="account-controls">
+
+    <a
+        href="/logout"
+        class="logout-link"
+    >
+        LOGOUT
+    </a>
+  
+  </div>
+
+</section>
+
+{% endblock %}
+
+{% block links %}
+<link rel="stylesheet" href="/static/css/account.css">
+{% endblock %}

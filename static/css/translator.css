@@ -1,0 +1,225 @@
+/* translator.css */
+
+/* ---------- PAGE LAYOUT ---------- */
+
+.translator-page {
+  height: 100%;
+}
+
+
+/* ---------- MAIN CONTAINER ---------- */
+
+.translator-container {
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+}
+
+
+/* ---------- HEADER (removed, spacing adjusted) ---------- */
+
+/* Title section completely removed, panels now take the extra space */
+
+
+/* ---------- TWO PANEL LAYOUT ---------- */
+
+.translator-grid {
+  flex: 1;
+
+  display: flex;
+  gap: 0;
+
+  min-height: 0;
+}
+
+
+/* ---------- PANELS ---------- */
+
+.translator-panel {
+  flex: 1;
+
+  display: flex;
+  flex-direction: column;
+
+  min-height: 0;
+}
+
+
+/* ---------- PANEL TITLES ---------- */
+
+.panel-label {
+  padding: 0 1.5rem 1rem 1.5rem;
+
+  font-family: "DM Serif Display", serif;
+  font-size: 1.5rem;
+  font-weight: 600;
+
+  letter-spacing: 1px;
+  color: #111111;
+}
+
+
+/* ---------- CENTER DIVIDER ---------- */
+
+.panel-divider {
+  width: 3px;
+
+  background-color: #111111;
+
+  margin: 0 1rem;
+}
+
+
+/* ---------- TEXT AREAS ---------- */
+
+.translator-input {
+  flex: 1;
+
+  min-height: 0;
+
+  background: transparent;
+  border: none;
+  outline: none;
+
+  resize: none;
+
+  padding: 0 1.5rem 1.5rem 1.5rem;
+
+  font-family: "Courier New", monospace;
+  font-size: 1.2rem;
+  line-height: 1.7;
+
+  color: #111111;
+}
+
+
+.translator-input::placeholder {
+  color: #999999;
+  font-size: 1.1rem;
+}
+
+
+/* ---------- FOOTER ---------- */
+
+.translator-footer {
+  margin-top: auto;
+
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+
+  padding-top: 1.5rem;
+}
+
+
+/* ---------- DASHED LINE ---------- */
+
+.footer-dashed {
+  width: 100%;
+
+  border-top: 1px dashed rgba(17, 17, 17, 0.45);
+}
+
+
+/* ---------- TIME UNIT CONTROL ---------- */
+
+.time-unit-control {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+
+  padding-bottom: 0.5rem;
+
+  font-family: "Courier New", monospace;
+  font-size: 0.85rem;
+  font-weight: 700;
+
+  text-transform: uppercase;
+  letter-spacing: 1px;
+
+  color: #111111;
+}
+
+
+.time-label,
+.time-unit-ms {
+  color: #555555;
+}
+
+
+/* ---------- SLIDER ---------- */
+
+.time-slider {
+  width: 280px;
+  height: 2px;
+
+  appearance: none;
+  background-color: #111111;
+
+  cursor: pointer;
+  outline: none;
+}
+
+
+.time-slider::-webkit-slider-thumb {
+  appearance: none;
+
+  width: 12px;
+  height: 12px;
+
+  background-color: #111111;
+  border: none;
+
+  cursor: pointer;
+}
+
+
+.time-slider::-moz-range-thumb {
+  width: 12px;
+  height: 12px;
+
+  background-color: #111111;
+  border: none;
+
+  cursor: pointer;
+}
+
+
+/* ---------- VALUE ---------- */
+
+.time-value {
+  min-width: 40px;
+
+  text-align: center;
+  font-weight: 700;
+}
+
+/* ---------- PLAY BUTTON ---------- */
+
+.play-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  
+  font-size: 1.2rem;
+  color: #111111;
+  
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  margin: 0;
+  
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  
+  flex-shrink: 0;
+  
+  transition: opacity 0.2s;
+  
+  line-height: 1;
+}

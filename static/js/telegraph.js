@@ -391,9 +391,6 @@ commentButton?.addEventListener("click", async () => {
 // HELPER FUNCTIONS
 // ============================================================
 
-/**
- * Sleep/pause execution for given milliseconds
- */
 function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }

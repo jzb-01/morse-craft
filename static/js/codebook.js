@@ -155,11 +155,6 @@ async function loadAndRender(section, displayName) {
   }
 }
 
-/**
- * Sleep/pause execution for given milliseconds
- * @param {number} ms - Milliseconds to sleep
- * @returns {Promise} Resolves after ms
- */
 function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }

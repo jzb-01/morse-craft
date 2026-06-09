@@ -3,6 +3,7 @@ from flask_session import Session
 from werkzeug.security import generate_password_hash, check_password_hash
 from models import db, Archive, User, Note, Comment  # Updated to import Comment
 from data import preview_table, letters, numbers, symbols
+import re
 
 app = Flask(__name__)
 
@@ -17,8 +18,18 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db.init_app(app)
 
 
+
+
 # =====================================================================
-# 🌐 PAGE RENDERING ROUTES
+# HELPER FUNCTION
+# =====================================================================
+
+def is_valid_email(email):
+    pattern = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'
+    return re.match(pattern, email) is not None
+
+# =====================================================================
+# PAGE RENDERING ROUTES
 # =====================================================================
 
 @app.route("/")
@@ -76,84 +87,82 @@ def archive():
     archives = Archive.query.all()
     return render_template("archive.html", archives=archives)
 
-@app.route("/blackbox")
-def blackbox():
+@app.route("/comments")
+def comments():
     # Fetching comments from the updated Comment model
     comments = Comment.query.all()
-    return render_template("blackbox.html", comments=comments)
+    return render_template("comments.html", comments=comments)
 
 
 
 # =====================================================================
-# ⚙️ AUTHENTICATION PAGES
+# AUTHENTICATION PAGES
 # =====================================================================
-
-
-
-
 
 
 @app.route("/login", methods=["POST"])
 def login():
-
     username = request.form.get("username")
     password = request.form.get("password")
 
-    user = User.query.filter_by(
-        username=username
-    ).first()
+    user = User.query.filter_by(username=username).first()
 
     if not user:
         flash("Unknown username.")
         return redirect("/auth")
 
-    if not check_password_hash(
-        user.password_hash,
-        password
-    ):
+    if not check_password_hash(user.password_hash, password):
         flash("Incorrect password.")
         return redirect("/auth")
 
     session["user_id"] = user.id
-
     return redirect("/account")
 
 @app.route("/register", methods=["POST"])
 def register():
-
     username = request.form.get("username")
     email = request.form.get("email")
     password = request.form.get("password")
 
-    existing_user = User.query.filter_by(
-        username=username
-    ).first()
+    # Validate inputs
+    if not username or not email or not password:
+        flash("All fields are required.")
+        return redirect("/auth")
+    
+    if len(username) < 3:
+        flash("Username must be at least 3 characters.")
+        return redirect("/auth")
+    
+    if len(password) < 6:
+        flash("Password must be at least 6 characters.")
+        return redirect("/auth")
+    
+    if not is_valid_email(email):
+        flash("Invalid email format.")
+        return redirect("/auth")
 
+    # Check existing user
+    existing_user = User.query.filter_by(username=username).first()
     if existing_user:
         flash("Username already exists.")
         return redirect("/auth")
 
-    existing_email = User.query.filter_by(
-        email=email
-    ).first()
-
+    existing_email = User.query.filter_by(email=email).first()
     if existing_email:
         flash("Email already exists.")
         return redirect("/auth")
 
+    # Create user
     user = User(
         username=username,
         email=email,
-        password_hash=generate_password_hash(
-            password
-        )
+        password_hash=generate_password_hash(password)
     )
 
     db.session.add(user)
     db.session.commit()
 
     session["user_id"] = user.id
-
     return redirect("/account")
 
 @app.route("/account")
@@ -190,7 +199,7 @@ def logout():
 
 
 # =====================================================================
-# ⚙️ API / DATA ENDPOINTS (JSON Responses)
+# API / DATA ENDPOINTS (JSON Responses)
 # =====================================================================
 
 
@@ -307,8 +316,8 @@ def create_note():
         "success": True
     }
 
-@app.route("/api/blackbox/<int:comment_id>")
-def blackbox_api(comment_id):
+@app.route("/api/comments/<int:comment_id>")
+def comments_api(comment_id):
     comment_entry = Comment.query.get_or_404(comment_id)
     user_id = session.get("user_id")
 
@@ -387,7 +396,7 @@ def delete_comment(comment_id):
     return {"success": True}
 
 # =====================================================================
-# 🚀 APPLICATION LAUNCH
+# APPLICATION LAUNCH
 # =====================================================================
 if __name__ == '__main__':
     app.run()

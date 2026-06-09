@@ -1,4 +1,6 @@
-/* ---------- RESET ---------- */
+/* ---------------------------------
+   RESET
+--------------------------------- */
 
 * {
   margin: 0;
@@ -6,159 +8,133 @@
   box-sizing: border-box;
 }
 
-
-/* ---------- BODY ---------- */
+/* ---------------------------------
+   BASE STYLES
+--------------------------------- */
 
 body {
   min-height: 100vh;
-
   display: flex;
   flex-direction: column;
-
   background-color: #C95E2C;
 }
 
+/* ---------------------------------
+   SITE HEADER
+--------------------------------- */
 
-/* ---------- TOP BAR ---------- */
-
-.top-bar {
+.site-header {
   margin: 2rem 2rem 0 2rem;
   padding-bottom: 1rem;
-
   display: flex;
   justify-content: space-between;
   align-items: center;
-
   border-bottom: 2px solid #111111;
 }
 
-
-/* ---------- TITLE ---------- */
-
-.site-title h1 {
+/* Brand section */
+.brand__title {
   font-size: 2.8rem;
   line-height: 1;
-
-  font-family:
-    "DM Serif Display",
-    serif;
+  font-family: "DM Serif Display", serif;
 }
 
-
-.site-title p {
+.brand__tagline {
   margin-top: 0.3rem;
-
   font-size: 0.75rem;
-
   letter-spacing: 2px;
   text-transform: uppercase;
 }
 
+/* ---------------------------------
+   MAIN NAVIGATION
+--------------------------------- */
 
-/* ---------- NAVIGATION ---------- */
-
-.navigation ul {
+.main-nav__list {
   display: flex;
   gap: 1.5rem;
-
   list-style: none;
 }
 
-
-.navigation a,
-.dropdown-button {
+.main-nav__link,
+.dropdown__trigger {
   background: none;
-
   border: none;
   border-bottom: 2px solid transparent;
-
   color: inherit;
-
   cursor: pointer;
   text-decoration: none;
-
   font-size: 1.4rem;
   font-weight: 600;
-
-  font-family:
-    "DM Serif Display",
-    serif;
+  font-family: "DM Serif Display", serif;
 }
 
-
-.navigation a:hover,
-.dropdown-button:hover {
+.main-nav__link:hover,
+.dropdown__trigger:hover {
   border-bottom-color: #111111;
 }
 
-
-/* ---------- DROPDOWN ---------- */
+/* ---------------------------------
+   DROPDOWN
+--------------------------------- */
 
 .dropdown {
   position: relative;
   padding-bottom: 0.4rem;
 }
 
-
-.dropdown-content {
+.dropdown__menu {
   display: none;
-
   position: absolute;
   top: 100%;
   right: 0;
-
   min-width: 190px;
   margin-top: 0;
-
   background-color: #FEF7E6;
   border: 2px solid #111111;
-
   z-index: 1000;
 }
 
-
-.dropdown:hover .dropdown-content {
+.dropdown:hover .dropdown__menu {
   display: block;
 }
 
-
-.dropdown-content a {
+.dropdown__link {
   display: block;
-
   padding: 0.7rem 1rem;
+  text-decoration: none;
+  color: inherit;
+  font-family: "DM Serif Display", serif;
 }
 
-
-.dropdown-content a:hover {
+.dropdown__link:hover {
   background-color: #111111;
   color: #FEF7E6;
 }
 
+/* ---------------------------------
+   MAIN CONTENT AREA
+--------------------------------- */
 
-/* ---------- MAIN AREA ---------- */
-
-.main-area {
+.main-content {
   flex: 1;
-
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 0;
 }
 
-
-/* ---------- CARD ---------- */
+/* ---------------------------------
+   CARD COMPONENT
+--------------------------------- */
 
 .card {
   width: 90%;
   height: 80vh;
-
   padding: 2rem;
-
   background-color: #FEF7E6;
   border: 2px solid #111111;
   overflow: hidden;
-  
   display: flex;
   flex-direction: column;
 }

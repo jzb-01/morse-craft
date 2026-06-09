@@ -1,221 +1,179 @@
-/* ---------- PAGE LAYOUT ---------- */
+/* ---------------------------------
+   CODEBOOK PAGE
+--------------------------------- */
 
-.code-page {
+.codebook {
   height: 100%;
-
   display: flex;
   flex-direction: column;
-
   gap: 1.5rem;
 }
 
+/* ---------------------------------
+   NAVIGATION BAR
+--------------------------------- */
 
-/* ---------- TABLE NAV ---------- */
-
-.table-nav {
+.codebook__nav {
   display: flex;
   justify-content: center;
   align-items: center;
-
   gap: 3rem;
 }
 
-
-.nav-button {
+.codebook__nav-btn {
   cursor: pointer;
-
+  background: none;
+  border: none;
   font-size: 1.1rem;
   font-weight: 600;
-
   font-family: "DM Serif Display", serif;
 }
 
-
-.nav-button:hover {
+.codebook__nav-btn:hover {
   opacity: 0.7;
 }
 
-
-.table-title {
+.codebook__title {
   font-size: 2rem;
-
   font-family: "DM Serif Display", serif;
 }
 
+/* ---------------------------------
+   TABLE WRAPPER (scrollable area)
+--------------------------------- */
 
-/* ---------- TABLE AREA ---------- */
-
-.table-wrapper {
+.codebook__table-wrapper {
   flex: 1;
-
   min-height: 0;
-
   overflow-y: auto;
-
   border-top: 2px solid #111111;
   border-bottom: 2px solid #111111;
-
+  
+  /* Vertical divider line in the middle */
   background-image: linear-gradient(#111111, #111111);
   background-size: 2px 92%;
   background-position: center center;
   background-repeat: no-repeat;
 }
 
+/* ---------------------------------
+   TABLE STYLES
+--------------------------------- */
 
-/* ---------- TABLE ---------- */
-
-.code-table {
+.codebook__table {
   width: 100%;
-
   border-collapse: collapse;
 }
 
-
-.code-table tr {
+.codebook__row {
   cursor: pointer;
 }
 
-
-.code-table tr:hover {
+.codebook__row:hover {
   background-color: rgba(17, 17, 17, 0.06);
 }
 
-
-.code-table td {
+.codebook__table td {
   width: 50%;
-
   padding: 1rem;
-
   text-align: center;
 }
 
-
-/* ---------- CHARACTER COLUMN ---------- */
-
-.character-cell {
+/* Character column */
+.codebook__char {
   font-size: 2rem;
   font-weight: 700;
-
   font-family: "DM Serif Display", serif;
-
   color: #111111;
 }
 
-
-/* ---------- MORSE COLUMN ---------- */
-
-.morse-cell {
+/* Morse code column */
+.codebook__morse {
   font-size: 1.1rem;
-
   font-family: "Courier New", monospace;
-
   color: #111111;
 }
 
+/* ---------------------------------
+   FOOTER SECTION
+--------------------------------- */
 
-/* ---------- FOOTER ---------- */
-
-.code-footer {
+.codebook__footer {
   display: flex;
   flex-direction: column;
-
   gap: 1.2rem;
 }
 
-
-/* ---------- DASHED DIVIDER ---------- */
-
-.footer-dashed {
+/* Dashed divider line */
+.codebook__divider {
   width: 100%;
-
   border-top: 1px dashed rgba(17, 17, 17, 0.4);
 }
 
-
-/* ---------- TIME CONTROL ---------- */
+/* ---------------------------------
+   TIME CONTROL COMPONENT
+--------------------------------- */
 
 .time-control {
   display: flex;
   justify-content: center;
   align-items: center;
-
   gap: 1rem;
-
   font-family: "Courier New", monospace;
   font-size: 0.85rem;
   font-weight: 700;
-
   text-transform: uppercase;
   letter-spacing: 1px;
-
   color: #111111;
 }
 
-
-.time-label,
-.time-unit-ms {
+.time-control__label,
+.time-control__unit {
   color: #555555;
 }
 
-
-/* ---------- SLIDER ---------- */
-
-.time-slider {
+.time-control__slider {
   width: 280px;
   height: 2px;
-
   appearance: none;
-
   background-color: #111111;
-
   cursor: pointer;
   outline: none;
 }
 
-
-.time-slider::-webkit-slider-thumb {
+/* WebKit browsers (Chrome, Safari, Edge) */
+.time-control__slider::-webkit-slider-thumb {
   appearance: none;
-
   width: 12px;
   height: 12px;
-
   background-color: #111111;
   border: none;
-
   cursor: pointer;
 }
 
-
-.time-slider::-moz-range-thumb {
+/* Firefox */
+.time-control__slider::-moz-range-thumb {
   width: 12px;
   height: 12px;
-
   background-color: #111111;
   border: none;
-
   cursor: pointer;
 }
 
-
-/* ---------- VALUE ---------- */
-
-.time-value {
+.time-control__value {
   min-width: 40px;
-
   text-align: center;
 }
 
+/* ---------------------------------
+   FOOTER NOTE
+--------------------------------- */
 
-/* ---------- NOTE ---------- */
-
-.table-note {
+.codebook__note {
   text-align: center;
-
   font-family: "Courier New", monospace;
   font-size: 0.75rem;
-
   text-transform: uppercase;
   letter-spacing: 1.5px;
-
   color: #555555;
 }

@@ -1,55 +1,58 @@
 {% extends "layout.html" %}
 
 {% block content %}
-<section class="telegraph-page">
 
-  <div class="telegraph-container">
+<div class="telegraph">
 
-    <!-- OUTPUT (now dominant area) -->
-    <div id="telegraphOutput" class="telegraph-output"></div>
+  <div class="telegraph__container">
+    <!-- OUTPUT (dominant display area) -->
+    <div id="telegraph-output" class="telegraph__output"></div>
 
-    <!-- TELEGRAPH KEY (now smaller + styled) -->
-    <div class="telegraph-key" id="telegraphKey"></div>
+    <!-- TELEGRAPH KEY (clickable input area) -->
+    <div id="telegraph-key" class="telegraph__key"></div>
 
     <!-- FOOTER -->
-    <div class="telegraph-footer">
+    <div class="telegraph__footer">
+      <div class="telegraph__divider"></div>
 
-      <div class="footer-dashed"></div>
+      <div class="time-control">
+        <button id="play-btn" class="time-control__play-btn" aria-label="Play morse code">
+          ▶
+        </button>
 
-      <div class="time-unit-control">
-        <button id="playButton" class="footer-button">▶</button>
+        <span class="time-control__label">TIME UNIT</span>
 
-        <span class="time-label">TIME UNIT</span>
+        <input type="range"
+               id="time-slider"
+               class="time-control__slider"
+               min="100"
+               max="1000"
+               value="200"
+               step="50"
+               aria-label="Morse code time unit in milliseconds">
 
-        <input
-          type="range"
-          id="timeSlider"
-          class="time-slider"
-          min="100"
-          max="1000"
-          value="200"
-          step="50"
-        >
+        <span id="time-value" class="time-control__value">200</span>
+        <span class="time-control__unit">ms</span>
 
-        <span id="timeValue" class="time-value">200</span>
-        <span class="time-unit-ms">ms</span>
-        <button id="clearButton" class="footer-button">⌫</button>
+        <button id="clear-btn" class="time-control__action-btn" aria-label="Clear output">
+          ⌫
+        </button>
+
         {% if logged_in %}
-          <button id="saveNoteButton" class="footer-button">
+          <button id="save-note-btn" class="time-control__action-btn" aria-label="Save as note">
             ✎
           </button>
 
-          <button id="commentButton" class="footer-button">
+          <button id="comment-btn" class="time-control__action-btn" aria-label="Post to comments">
             ✉
           </button>
         {% endif %}
       </div>
-
     </div>
-
   </div>
 
-</section>
+</div>
+
 {% endblock %}
 
 {% block links %}

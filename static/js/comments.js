@@ -1,24 +1,25 @@
 import { beep } from "./utils.js";
 
 // ============================================================
-// ARCHIVE PAGE - Browse and read classified transmissions
+// comments PAGE - Browse and read community comments
 // ============================================================
 
 // DOM Elements - using refactored class/id names
-const browserView = document.getElementById("archive-browser");
-const readerView = document.getElementById("archive-reader");
+const browserView = document.getElementById("comments-browser");
+const readerView = document.getElementById("comments-reader");
 
 const readerTitle = document.getElementById("reader-title");
 const readerContent = document.getElementById("reader-content");
 
 const backButton = document.getElementById("reader-back-btn");
 
-const tableBody = document.querySelector(".archive__table tbody");
+const tableBody = document.querySelector(".comments__table tbody");
 
 const timeSlider = document.getElementById("time-slider");
 const timeDisplay = document.getElementById("time-value");
 
 const playButton = document.getElementById("play-btn");
+const deleteButton = document.getElementById("delete-btn");
 
 // Audio state
 let audioContext = null;
@@ -33,33 +34,68 @@ timeSlider.addEventListener("input", () => {
   timeDisplay.textContent = timeSlider.value;
 });
 
-// Load and display an archive when a row is clicked
-tableBody.addEventListener("click", async (event) => {
-  const row = event.target.closest(".archive__row");
+// Load and display a comment when a row is clicked
+tableBody?.addEventListener("click", async (event) => {
+  const row = event.target.closest(".comments__row");
   if (!row) return;
 
-  const archiveId = row.dataset.id;
+  const commentId = row.dataset.id;
 
   try {
-    const response = await fetch(`/api/archive/${archiveId}`);
+    const response = await fetch(`/api/comments/${commentId}`);
     if (!response.ok) throw new Error(`HTTP ${response.status}`);
 
-    const archive = await response.json();
+    const comment = await response.json();
 
-    readerTitle.textContent = archive.title;
-    readerContent.textContent = archive.content;
+    readerTitle.textContent = `By ${comment.author}`;
+    readerContent.textContent = comment.content;
+
+    // Store comment ID for deletion
+    deleteButton.dataset.id = comment.id;
+
+    // Show delete button only if user is the author
+    if (comment.can_delete) {
+      deleteButton.classList.remove("hidden");
+    } else {
+      deleteButton.classList.add("hidden");
+    }
 
     // Switch to reader view
     browserView.classList.add("hidden");
     readerView.classList.remove("hidden");
   } catch (error) {
-    console.error("Failed to load archive:", error);
+    console.error("Failed to load comment:", error);
     alert("Unable to load transmission. Please try again.");
   }
 });
 
+// Delete the current comment (only visible to author)
+deleteButton?.addEventListener("click", async () => {
+  const commentId = deleteButton.dataset.id;
+  if (!commentId) return;
+
+  const confirmDelete = confirm("Permanently delete this transmission?");
+  if (!confirmDelete) return;
+
+  try {
+    const response = await fetch(`/api/commentdelete/${commentId}`, {
+      method: "DELETE",
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP ${response.status}`);
+    }
+
+    // Reload page to refresh the comments list
+    window.location.reload();
+  } catch (error) {
+    console.error("Failed to delete comment:", error);
+    alert("Unable to delete. Please try again.");
+  }
+});
+
 // Return to browser view
-backButton.addEventListener("click", () => {
+backButton?.addEventListener("click", () => {
   // Stop any ongoing playback before leaving
   if (isPlaying) {
     isPlaying = false;
@@ -69,13 +105,15 @@ backButton.addEventListener("click", () => {
   readerView.classList.add("hidden");
   browserView.classList.remove("hidden");
 
-  // Clear reader content
+  // Clean up reader view
   readerTitle.textContent = "";
   readerContent.textContent = "";
+  deleteButton.classList.add("hidden");
+  deleteButton.dataset.id = "";
 });
 
-// Play or stop Morse code from the current archive content
-playButton.addEventListener("click", async () => {
+// Play or stop Morse code from the current comment content
+playButton?.addEventListener("click", async () => {
   // Stop playback if currently playing
   if (isPlaying) {
     isPlaying = false;

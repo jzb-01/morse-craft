@@ -2,100 +2,77 @@
 
 {% block content %}
 
-<section class="code-page">
+<div class="codebook">
 
-  <div class="table-nav">
-
-    <span id="left" class="nav-button">
+  <div class="codebook__nav">
+    <button type="button" id="prev-btn" class="codebook__nav-btn" aria-label="Previous section">
       ← PREV
-    </span>
+    </button>
 
-    <h2 id="table-name" class="table-title">
+    <h2 id="table-title" class="codebook__title">
       LETTERS
     </h2>
 
-    <span id="right" class="nav-button">
+    <button type="button" id="next-btn" class="codebook__nav-btn" aria-label="Next section">
       NEXT →
-    </span>
-
+    </button>
   </div>
 
-
-  <div class="table-wrapper">
-
-    <table class="code-table">
-
-      <tbody id="code-table-body">
-
+  <div class="codebook__table-wrapper">
+    <table class="codebook__table">
+      <tbody id="codebook-body">
         {% if letters_dict %}
-
           {% for char, morse in letters_dict.items() %}
-
-          <tr>
-
-            <td class="character-cell">
-              {{ char }}
-            </td>
-
-            <td class="morse-cell">
-              {{ morse }}
-            </td>
-
-          </tr>
-
+            <tr class="codebook__row" data-char="{{ char }}" data-morse="{{ morse }}">
+              <td class="codebook__char">
+                {{ char }}
+              </td>
+              <td class="codebook__morse">
+                {{ morse }}
+              </td>
+            </tr>
           {% endfor %}
-
         {% endif %}
-
       </tbody>
-
     </table>
-
   </div>
 
-
-  <!-- FOOTER -->
-
-  <div class="code-footer">
-
-    <div class="footer-dashed"></div>
+  <div class="codebook__footer">
+    <div class="codebook__divider"></div>
 
     <div class="time-control">
-
-      <span class="time-label">
+      <span class="time-control__label">
         TIME UNIT
       </span>
 
       <input
         type="range"
         id="time-slider"
-        class="time-slider"
+        class="time-control__slider"
         min="100"
         max="1000"
         value="200"
         step="50"
+        aria-label="Morse code time unit in milliseconds"
       >
 
-      <span id="time-unit-value" class="time-value">
+      <span id="time-value" class="time-control__value">
         200
       </span>
 
-      <span class="time-unit-ms">
+      <span class="time-control__unit">
         ms
       </span>
-
     </div>
 
-    <div class="table-note">
+    <div class="codebook__note">
       click any row to hear the morse code
     </div>
-
   </div>
 
-</section>
+</div>
 
 {% endblock %}
-
 
 {% block links %}
 <link rel="stylesheet" href="/static/css/codebook.css">

@@ -1,0 +1,105 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<div class="comments">
+
+  <!-- ================================
+       BROWSER VIEW - Table of comments
+       ================================ -->
+
+  <div class="comments__browser" id="comments-browser">
+
+    <div class="comments__header">
+      <h2 class="comments__title">COMMENTS</h2>
+      <p class="comments__subtitle">
+        Public comments by the community
+      </p>
+    </div>
+
+    <div class="comments__table-wrapper">
+      <table class="comments__table">
+        <thead>
+          <tr>
+            <th>AUTHOR</th>
+            <th>PREVIEW</th>
+            <th>DATE</th>
+            <th>CHARS</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for comment in comments %}
+          <tr class="comments__row" data-id="{{ comment.id }}">
+            <td class="comments__cell-author">{{ comment.author.username }}</td>
+            <td class="comments__cell-preview">{{ comment.content[:80] }}</td>
+            <td class="comments__cell-meta">{{ comment.created_at }}</td>
+            <td class="comments__cell-meta">{{ comment.length }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+
+    <div class="comments__footer-note">
+      ✦ click any row to decode the full transmission ✦
+    </div>
+
+  </div>
+
+  <!-- ================================
+       READER VIEW - Single comment display
+       ================================ -->
+
+  <div class="comments__reader hidden" id="comments-reader">
+
+    <div class="comments__reader-header">
+      <button type="button" class="comments__back-btn" id="reader-back-btn">
+        ← BACK
+      </button>
+      <h2 class="comments__reader-title" id="reader-title">
+        Archive Title
+      </h2>
+    </div>
+
+    <div class="comments__reader-content" id="reader-content">
+      Archive content appears here.
+    </div>
+
+    <div class="comments__reader-footer">
+      <div class="comments__divider"></div>
+
+      <div class="time-control">
+        <button id="play-btn" class="time-control__play-btn" aria-label="Play morse code">
+          ▶
+        </button>
+
+        <span class="time-control__label">TIME UNIT</span>
+
+        <input type="range"
+               id="time-slider"
+               class="time-control__slider"
+               min="100"
+               max="1000"
+               value="200"
+               step="50"
+               aria-label="Morse code time unit in milliseconds">
+
+        <span id="time-value" class="time-control__value">200</span>
+        <span class="time-control__unit">ms</span>
+
+        <button id="delete-btn" class="time-control__delete-btn hidden" aria-label="Delete comment">
+          🗑
+        </button>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+{% endblock %}
+
+{% block links %}
+<link rel="stylesheet" href="/static/css/comments.css">
+<script type="module" src="/static/js/comments.js"></script>
+{% endblock %}

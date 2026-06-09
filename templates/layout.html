@@ -3,81 +3,56 @@
 
 <head>
   <meta charset="UTF-8" />
-
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
-  />
-
-  <title>Morse-Craft · analog signals</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Morse-Craft - Learn and practice Morse code with interactive tools" />
+  
+  <title>Morse-Craft</title>
 
   <link rel="stylesheet" href="/static/css/layout.css" />
 
   {% block links %}{% endblock %}
-
 </head>
 
 <body>
 
-  <header class="top-bar">
-
-    <div class="site-title">
-      <h1>MORSE·CRAFT</h1>
-      <p>analog signals · graphic code</p>
+  <header class="site-header">
+    <div class="brand">
+      <h1 class="brand__title">MORSE·CRAFT</h1>
+      <p class="brand__tagline">the art of transmission</p>
     </div>
 
-    <nav class="navigation">
-
-      <ul>
-
-        <li><a href="/">HOME</a></li>
-        <li><a href="/codebook">CODEBOOK</a></li>
-        <li><a href="/archive">ARCHIVES</a></li>
-        <li><a href="/notes">NOTES</a></li>
-        <li><a href="/blackbox">BLACKBOX</a></li>
+    <nav class="main-nav" aria-label="Main navigation">
+      <ul class="main-nav__list">
+        <li><a href="/" class="main-nav__link">HOME</a></li>
+        <li><a href="/codebook" class="main-nav__link">CODEBOOK</a></li>
+        <li><a href="/archive" class="main-nav__link">ARCHIVES</a></li>
+        <li><a href="/notes" class="main-nav__link">NOTES</a></li>
+        <li><a href="/comments" class="main-nav__link">COMMENTS</a></li>
         <li>
           {% if session.get("user_id") %}
-
-            <a href="/account">
-              ACCOUNT
-            </a>
-
-            {% else %}
-
-            <a href="/auth">
-              LOG IN
-            </a>
-
+            <a href="/account" class="main-nav__link">ACCOUNT</a>
+          {% else %}
+            <a href="/auth" class="main-nav__link">LOG IN</a>
           {% endif %}
         </li>
-
         <li class="dropdown">
-
-          <button class="dropdown-button">
+          <button class="dropdown__trigger" aria-expanded="false" aria-haspopup="true">
             TOOLS ▼
           </button>
-
-          <div class="dropdown-content">
-            <a href="/translator">TRANSLATOR</a>
-            <a href="/telegraph">TELEGRAPH</a>
-            <a href="/training">TRAINING</a>
+          <div class="dropdown__menu" aria-label="Tools submenu">
+            <a href="/translator" class="dropdown__link">TRANSLATOR</a>
+            <a href="/telegraph" class="dropdown__link">TELEGRAPH</a>
+            <a href="/training" class="dropdown__link">TRAINING</a>
           </div>
-
         </li>
-
       </ul>
-
     </nav>
-
   </header>
 
-
-  <main class="main-area">
-
-    <section class="card">
+  <main class="main-content">
+    <div class="card">
       {% block content %}{% endblock %}
-    </section>
-
+    </div>
   </main>
 
 </body>

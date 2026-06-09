@@ -4,25 +4,23 @@
 
 {% if session.get("user_id") %}
 
-<section class="archives-page">
+<div class="notes">
 
-  <!-- ===================== -->
-  <!-- TABLE VIEW            -->
-  <!-- ===================== -->
+  <!-- ================================
+       BROWSER VIEW - Table of notes
+       ================================ -->
 
-  <div class="archives-browser" id="archivesBrowser">
+  <div class="notes__browser" id="notes-browser">
 
-    <div class="archives-header">
-      <h2 class="archives-title">PRIVATE NOTES</h2>
-      <p class="archives-subtitle">
+    <div class="notes__header">
+      <h2 class="notes__title">PRIVATE NOTES</h2>
+      <p class="notes__subtitle">
         personal transmissions · encrypted thoughts · stored records
       </p>
     </div>
 
-    <div class="archives-table-wrapper">
-
-      <table class="archives-table">
-
+    <div class="notes__table-wrapper">
+      <table class="notes__table">
         <thead>
           <tr>
             <th>ID</th>
@@ -31,150 +29,88 @@
             <th>CHARS</th>
           </tr>
         </thead>
-
         <tbody>
-
           {% for note in notes %}
-
-          <tr
-            class="archive-row"
-            data-id="{{ note.id }}"
-          >
-            <td class="entry-title">
-              {{ note.id }}
-            </td>
-
-            <td class="entry-preview">
-              {{ note.content[:80] }}...
-            </td>
-
-            <td class="entry-meta">
-              {{ note.created_at.strftime("%Y-%m-%d") }}
-            </td>
-
-            <td class="entry-meta">
-              {{ note.length }}
-            </td>
-
+          <tr class="notes__row" data-id="{{ note.id }}">
+            <td class="notes__cell-id">{{ note.id }}</td>
+            <td class="notes__cell-preview">{{ note.content[:80] }}...</td>
+            <td class="notes__cell-meta">{{ note.created_at.strftime("%Y-%m-%d") }}</td>
+            <td class="notes__cell-meta">{{ note.length }}</td>
           </tr>
-
           {% endfor %}
-
         </tbody>
-
       </table>
-
     </div>
 
-    <div class="archives-footer">
+    <div class="notes__footer-note">
       ✦ click any row to open the full note ✦
     </div>
 
   </div>
 
+  <!-- ================================
+       READER VIEW - Single note display
+       ================================ -->
 
-  <!-- ===================== -->
-  <!-- READER VIEW           -->
-  <!-- ===================== -->
+  <div class="notes__reader hidden" id="notes-reader">
 
-  <div class="archive-reader hidden" id="archiveReader">
-
-    <div class="reader-header">
-
-      <button
-        type="button"
-        class="reader-back-button"
-        id="readerBackButton"
-      >
+    <div class="notes__reader-header">
+      <button type="button" class="notes__back-btn" id="reader-back-btn">
         ← BACK
       </button>
-
-      <h2
-        class="reader-title"
-        id="readerTitle"
-      >
+      <h2 class="notes__reader-title" id="reader-title">
         NOTE
       </h2>
-
     </div>
 
-    <div
-      class="reader-content"
-      id="readerContent"
-    >
+    <div class="notes__reader-content" id="reader-content">
       Note content appears here.
     </div>
 
-    <div class="reader-footer">
+    <div class="notes__reader-footer">
+      <div class="notes__divider"></div>
 
-      <div class="footer-dashed"></div>
-
-      <div class="time-unit-control">
-
-        <button
-          id="playButton"
-          class="play-button"
-        >
+      <div class="time-control">
+        <button id="play-btn" class="time-control__play-btn" aria-label="Play morse code">
           ▶
         </button>
 
-        <span class="time-label">
-          TIME UNIT
-        </span>
+        <span class="time-control__label">TIME UNIT</span>
 
-        <input
-          type="range"
-          id="timeSlider"
-          class="time-slider"
-          min="100"
-          max="1000"
-          value="200"
-          step="50"
-        >
+        <input type="range"
+               id="time-slider"
+               class="time-control__slider"
+               min="100"
+               max="1000"
+               value="200"
+               step="50"
+               aria-label="Morse code time unit in milliseconds">
 
-        <span
-          id="timeValue"
-          class="time-value"
-        >
-          200
-        </span>
+        <span id="time-value" class="time-control__value">200</span>
+        <span class="time-control__unit">ms</span>
 
-        <span class="time-unit-ms">
-          ms
-        </span>
-        
-        <button id="deleteButton" class="play-button">
+        <button id="delete-btn" class="time-control__delete-btn" aria-label="Delete note">
           🗑
-        </button>        
-
+        </button>
       </div>
-
     </div>
 
   </div>
 
-</section>
+</div>
 
 {% else %}
 
-<section class="notes-locked">
-
-  <div class="locked-content">
-
+<div class="notes__locked">
+  <div class="notes__locked-content">
     <h2>PRIVATE NOTES</h2>
-
-    <p>
-      log in to access personal transmissions
-    </p>
-
+    <p>log in to access personal transmissions</p>
   </div>
-
-</section>
+</div>
 
 {% endif %}
 
 {% endblock %}
-
 
 {% block links %}
 <link rel="stylesheet" href="/static/css/notes.css">

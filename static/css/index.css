@@ -1,168 +1,134 @@
-/* ---------- PAGE ---------- */
+/* ---------------------------------
+   HOME PAGE - Main container (two-column grid)
+--------------------------------- */
 
-.index-page {
-  display: flex;
-  flex-direction: column;
-
-  gap: 2.5rem;
+.home {
+  height: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
 }
 
+/* ---------------------------------
+   LEFT PANEL - Introduction
+--------------------------------- */
 
-/* ---------- HEADER ---------- */
+.home__intro {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 3rem;
+  border-right: 2px solid #111111;
+}
 
-.home-header {
+.home__intro-content {
+  width: 100%;
+  max-width: 40rem;
   text-align: center;
 }
 
-
-.home-mark {
+.home__intro-mark {
   margin-bottom: 1rem;
-
   font-family: "Courier New", monospace;
   font-size: 1rem;
-
   letter-spacing: 4px;
-
-  color: #555555;
+  color: #666666;
 }
 
-
-.home-title {
-  margin-bottom: 0.75rem;
-
+.home__intro-title {
+  margin: 0;
   font-family: "DM Serif Display", serif;
-  font-size: 4.2rem;
-  font-weight: 700;
-
+  font-size: 4.5rem;
   line-height: 1;
 }
 
-
-.home-subtitle {
-  max-width: 55rem;
-
-  margin: 0 auto;
-
+.home__intro-subtitle {
+  margin-top: 1rem;
   font-family: "Courier New", monospace;
-  font-size: 0.95rem;
-
+  font-size: 1rem;
   text-transform: uppercase;
   letter-spacing: 1px;
-
   color: #555555;
 }
 
-
-.home-divider {
+.home__intro-divider {
   width: 100%;
-
-  margin: 2rem 0;
-
+  max-width: 24rem;
+  margin: 2rem auto;
   border-top: 2px solid #111111;
 }
 
-
-.home-description {
-
-  padding-top: 2rem;
-  max-width: 75ch;
-
-  margin: 0 auto;
-
+.home__intro-text {
   display: flex;
   flex-direction: column;
-
-  gap: 1.25rem;
+  gap: 1.5rem;
 }
 
-
-.home-description p {
-  font-size: 1.05rem;
-  line-height: 1.8;
-
+.home__intro-text p {
+  margin: 0;
+  font-size: 1.1rem;
+  line-height: 1.9;
   color: #222222;
 }
 
+/* ---------------------------------
+   RIGHT PANEL - Reference table
+--------------------------------- */
 
-/* ---------- REFERENCE ---------- */
-
-.reference-panel {
-  border-top: 2px solid #111111;
-
-  padding-top: 1.5rem;
-}
-
-
-.reference-header {
+.home__reference {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
-
-  margin-bottom: 1.5rem;
+  padding: 3rem;
 }
 
+.home__reference-content {
+  width: 100%;
+  max-width: 32rem;
+}
 
-.reference-title {
+.home__reference-title {
+  margin: 0;
   font-family: "DM Serif Display", serif;
-  font-size: 2rem;
-  font-weight: 700;
+  font-size: 3rem;
+  line-height: 1;
+  text-align: center;
 }
 
-
-.reference-note {
+.home__reference-subtitle {
+  margin-top: 0.75rem;
   font-family: "Courier New", monospace;
-  font-size: 0.85rem;
-
+  font-size: 0.95rem;
   text-transform: uppercase;
   letter-spacing: 1px;
-
   color: #555555;
 }
 
-
-/* ---------- GRID ---------- */
-
-.morse-grid {
-  display: grid;
-
-  grid-template-columns: repeat(4, 1fr);
-
-  gap: 1rem 2rem;
+.home__reference-divider {
+  margin: 2rem 0;
+  border-top: 2px solid #111111;
 }
 
+.home__reference-grid {
+  text-align: left;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.8rem 2rem;
+}
 
-.morse-item {
+.home__reference-item {
   display: flex;
   justify-content: space-between;
-
-  padding-bottom: 0.5rem;
-
-  border-bottom: 1px dashed rgba(17, 17, 17, 0.3);
+  align-items: center;
+  padding-bottom: 0.45rem;
+  border-bottom: 1px dashed rgba(17, 17, 17, 0.25);
 }
 
-
-.morse-letter {
-  font-size: 1.1rem;
+.home__reference-key {
+  font-size: 1rem;
   font-weight: 700;
 }
 
-
-.morse-code {
+.home__reference-value {
   font-family: "Courier New", monospace;
   font-size: 1rem;
-}
-
-
-/* ---------- MOBILE ---------- */
-
-@media (max-width: 900px) {
-
-  .home-title {
-    font-size: 3rem;
-  }
-
-  .morse-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
 }

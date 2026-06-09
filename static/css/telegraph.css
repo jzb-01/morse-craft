@@ -1,210 +1,209 @@
-/* ---------- PAGE LAYOUT ---------- */
+/* ---------------------------------
+   TELEGRAPH PAGE - Main container
+--------------------------------- */
 
-.telegraph-page {
+.telegraph {
   height: 100%;
 }
 
+/* ---------------------------------
+   MAIN CONTAINER
+--------------------------------- */
 
-/* ---------- MAIN CONTAINER ---------- */
-
-.telegraph-container {
+.telegraph__container {
   height: 100%;
-
   display: flex;
   flex-direction: column;
-
   gap: 1rem;
 }
 
+/* ---------------------------------
+   OUTPUT DISPLAY
+--------------------------------- */
 
-/* ---------- OUTPUT (MAIN FOCUS) ---------- */
-
-.telegraph-output {
+.telegraph__output {
   flex: 1;
-
   margin: 1rem 1rem 0 1rem;
-
   padding: 1.2rem;
-
   border: 2px solid #111111;
   background-color: #FEF7E6;
-
   font-family: "Courier New", monospace;
   font-size: 1.2rem;
   line-height: 1.6;
-
   color: #111111;
-
   overflow-y: auto;
   white-space: pre-wrap;
   word-break: break-word;
-
-  /* subtle “analog screen” feel */
+  
+  /* Analog screen feel */
   box-shadow: inset 0 0 0 1px rgba(17, 17, 17, 0.15);
 }
 
+/* ---------------------------------
+   TELEGRAPH KEY (Heavy version)
+--------------------------------- */
 
-/* ---------- TELEGRAPH KEY (REFINED HEAVIER VERSION) ---------- */
-
-.telegraph-key {
+.telegraph__key {
   margin: 0 1rem;
-
   height: 70px;
-
   display: flex;
   align-items: center;
   justify-content: center;
-
-  border: 4px solid #111111;   /* thicker border */
+  border: 4px solid #111111;   /* Thicker border for heavy feel */
   background-color: #FEF7E6;
-
   cursor: pointer;
   user-select: none;
-
   position: relative;
-
   transition: transform 0.08s ease, background-color 0.15s ease;
 }
 
-/* wider central “contact bar” */
-.telegraph-key::before {
+/* Central contact bar (wider) */
+.telegraph__key::before {
   content: "";
-
-  width: 85%;                  /* much wider now */
+  width: 85%;
   height: 20px;
-
   background-color: #111111;
-
   position: absolute;
 }
 
-/* hover */
-
-.telegraph-key:hover {
+/* Hover state */
+.telegraph__key:hover {
   background-color: #F7EEDC;
 }
 
-
-/* pressed state (mouse, keyboard, touch) */
-
-.telegraph-key.active {
+/* Pressed state (mouse, keyboard, touch) */
+.telegraph__key.active {
   transform: translateY(2px);
   background-color: #F2E6CF;
 }
 
-
-/* center contact bar */
-
-.telegraph-key.active::before {
+/* Contact bar pressed effect */
+.telegraph__key.active::before {
   transform: scaleY(0.9);
   opacity: 0.9;
 }
 
+/* ---------------------------------
+   FOOTER
+--------------------------------- */
 
-/* ---------- FOOTER ---------- */
-
-.telegraph-footer {
+.telegraph__footer {
   margin-top: auto;
-
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
-
   padding-top: 1rem;
 }
 
-
-/* ---------- DASHED LINE ---------- */
-
-.footer-dashed {
+/* Dashed divider line */
+.telegraph__divider {
   width: 100%;
   border-top: 1px dashed rgba(17, 17, 17, 0.45);
 }
 
+/* ---------------------------------
+   TIME CONTROL COMPONENT
+   (Matches all other pages)
+--------------------------------- */
 
-/* ---------- TIME CONTROL (UNCHANGED STYLE) ---------- */
-
-.time-unit-control {
+.time-control {
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 1rem;
-
   padding-bottom: 0.5rem;
-
   font-family: "Courier New", monospace;
   font-size: 0.85rem;
   font-weight: 700;
-
   text-transform: uppercase;
   letter-spacing: 1px;
-
   color: #111111;
 }
 
-.time-label,
-.time-unit-ms {
+.time-control__label,
+.time-control__unit {
   color: #555555;
 }
 
-.time-slider {
+.time-control__play-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.2rem;
+  width: 24px;
+  height: 24px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: opacity 0.2s ease;
+  line-height: 1;
+}
+
+.time-control__play-btn:hover {
+  opacity: 0.7;
+}
+
+/* Action buttons (clear, save, comment) */
+.time-control__action-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.2rem;
+  width: 24px;
+  height: 24px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: opacity 0.2s ease;
+  line-height: 1;
+}
+
+.time-control__action-btn:hover {
+  opacity: 0.7;
+}
+
+.time-control__slider {
   width: 280px;
   height: 2px;
-
   appearance: none;
   background-color: #111111;
-
   cursor: pointer;
   outline: none;
 }
 
-.time-slider::-webkit-slider-thumb {
+/* WebKit browsers */
+.time-control__slider::-webkit-slider-thumb {
   appearance: none;
-
   width: 12px;
   height: 12px;
-
   background-color: #111111;
   border: none;
-
   cursor: pointer;
 }
 
-.time-slider::-moz-range-thumb {
+/* Firefox */
+.time-control__slider::-moz-range-thumb {
   width: 12px;
   height: 12px;
-
   background-color: #111111;
   border: none;
-
   cursor: pointer;
 }
 
-.time-value {
+.time-control__value {
   min-width: 40px;
   text-align: center;
   font-weight: 700;
 }
 
-
-/* ---------- PLAY BUTTON ---------- */
-
-.footer-button {
-  background: none;
-  border: none;
-  cursor: pointer;
-
-  font-size: 1.2rem;
-  color: #111111;
-
-  width: 24px;
-  height: 24px;
-
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-
-  flex-shrink: 0;
-
-  line-height: 1;
+/* Placeholder text for empty telegraph output */
+.telegraph__output:empty::before {
+  content: "Press and hold the telegraph key (use LEFT CLICK or SPACEBAR) to send Morse code. Dot = short tap | Dash = long press. Release to finish each symbol. Text appears here. Use the play button ▶ to hear it back, clear ⌫ to start over, and save to your private notes ✎ or post as a public comment ✉ if logged in.";
+  color: #999999;
+  font-family: "Courier New", monospace;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  white-space: pre-wrap;
 }

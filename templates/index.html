@@ -2,85 +2,72 @@
 
 {% block content %}
 
-<section class="index-page">
+<div class="home">
 
-  <header class="home-header">
-
-    <div class="home-mark">
-      .-- . .-.. -.-. --- -- .
-    </div>
-
-    <h2 class="home-title">
-      MORSE-CRAFT
-    </h2>
-
-    <p class="home-subtitle">
-      Learn, practice, translate, and explore the language of dots and dashes.
-    </p>
-
-    <div class="home-description">
-
-      <p>
-        Morse code is a communication system that represents letters,
-        numbers, and symbols through combinations of short and long
-        signals. Developed during the early age of telegraphy, it allowed
-        messages to travel across vast distances using nothing more than
-        rhythm and timing.
-      </p>
-
-      <p>
-        Though modern technology has largely replaced it, Morse remains
-        one of the most recognizable communication systems ever created.
-        It continues to be used by radio operators, enthusiasts,
-        historians, and anyone interested in understanding how information
-        can be reduced to its simplest form.
-      </p>
-
-    </div>
-
-  </header>
-
-
-  <section class="reference-panel">
-
-    <div class="reference-header">
-
-      <h3 class="reference-title">
-        QUICK REFERENCE
-      </h3>
-
-      <span class="reference-note">
-        letters and numbers
-      </span>
-
-    </div>
-
-    <div class="morse-grid">
-
-      {% for key, value in preview_table.items() %}
-
-      <div class="morse-item">
-
-        <span class="morse-letter">
-          {{ key }}
-        </span>
-
-        <span class="morse-code">
-          {{ value }}
-        </span>
-
+  <!-- LEFT PANEL - Introduction -->
+  <div class="home__intro">
+    <div class="home__intro-content">
+      <div class="home__intro-mark">
+        .-- . .-.. -.-. --- -- .
       </div>
 
-      {% endfor %}
+      <h1 class="home__intro-title">
+        MORSE-CRAFT
+      </h1>
 
+      <p class="home__intro-subtitle">
+        Learn, practice, translate, and explore the language of dots and dashes.
+      </p>
+
+      <div class="home__intro-divider"></div>
+
+      <div class="home__intro-text">
+        <p>
+          Morse code is a communication system that represents letters,
+          numbers, and symbols through combinations of short and long
+          signals. Developed during the age of telegraphy, it allowed
+          messages to travel across vast distances using nothing more than
+          rhythm, timing, and electrical pulses.
+        </p>
+
+        <p>
+          Long before instant messaging and wireless networks, Morse
+          connected cities, ships, railways, and people around the world.
+          Its elegant simplicity continues to fascinate radio operators,
+          historians, and learners who want to understand one of the most
+          influential communication systems ever created.
+        </p>
+      </div>
     </div>
+  </div>
 
-  </section>
+  <!-- RIGHT PANEL - Reference table -->
+  <div class="home__reference">
+    <div class="home__reference-content">
+      <h2 class="home__reference-title">
+        THE LANGUAGE OF SIGNALS
+      </h2>
 
-</section>
+      <p class="home__reference-subtitle">
+        full interactive table at CODEBOOK
+      </p>
+
+      <div class="home__reference-divider"></div>
+
+      <div class="home__reference-grid">
+        {% for key, value in preview_table.items() %}
+        <div class="home__reference-item">
+          <span class="home__reference-key">{{ key }}</span>
+          <span class="home__reference-value">{{ value }}</span>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+
+</div>
 
 {% endblock %}
-
 
 {% block links %}
 <link rel="stylesheet" href="/static/css/index.css">

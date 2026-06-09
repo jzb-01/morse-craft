@@ -1,193 +1,156 @@
-/* ---------- PAGE ---------- */
+/* ---------------------------------
+   AUTH PAGE - Main container
+--------------------------------- */
 
-.auth-page {
+.auth {
   height: 100%;
-
   display: flex;
   flex-direction: column;
-
   gap: 1.5rem;
 }
 
+/* ---------------------------------
+   HEADER
+--------------------------------- */
 
-/* ---------- HEADER ---------- */
-
-.auth-header {
+.auth__header {
   display: flex;
   flex-direction: column;
-
   gap: 0.3rem;
 }
 
-
-.auth-title {
+.auth__title {
   font-family: "DM Serif Display", serif;
-
   font-size: 2.2rem;
   font-weight: 700;
-
   color: #111111;
 }
 
-
-.auth-subtitle {
+.auth__subtitle {
   font-family: "Courier New", monospace;
-
   font-size: 0.75rem;
-
   text-transform: uppercase;
   letter-spacing: 1px;
-
   color: #555555;
 }
 
+/* ---------------------------------
+   MAIN CONTAINER (login + register)
+--------------------------------- */
 
-/* ---------- MAIN AREA ---------- */
-
-.auth-container {
+.auth__container {
   flex: 1;
-
   display: flex;
-
   min-height: 0;
 }
 
+/* ---------------------------------
+   AUTH PANELS (login/register sections)
+--------------------------------- */
 
-/* ---------- PANELS ---------- */
-
-.auth-panel {
+.auth__panel {
   flex: 1;
-
   display: flex;
   flex-direction: column;
-
   justify-content: center;
-
   padding: 2rem 3rem;
 }
 
-
-/* ---------- CENTER DIVIDER ---------- */
-
-.auth-divider {
+/* Vertical divider line */
+.auth__divider {
   width: 2px;
-
   background-color: #111111;
-
   margin: 2rem 0;
 }
 
-
-/* ---------- TITLES ---------- */
-
-.panel-title {
+.auth__panel-title {
   margin-bottom: 2rem;
-
   text-align: center;
-
   font-family: "DM Serif Display", serif;
-
   font-size: 1.8rem;
   font-weight: 700;
-
   color: #111111;
 }
 
+/* ---------------------------------
+   FORM STYLES
+--------------------------------- */
 
-/* ---------- FORM ---------- */
-
-.auth-form {
+.auth__form {
   display: flex;
   flex-direction: column;
-
   gap: 0.8rem;
 }
 
-
-/* ---------- LABELS ---------- */
-
-.auth-form label {
+.auth__label {
   margin-top: 0.5rem;
-
   font-family: "Courier New", monospace;
-
   font-size: 0.8rem;
-
   letter-spacing: 1px;
-
   color: #555555;
 }
 
-
-/* ---------- INPUTS ---------- */
-
-.auth-form input {
+.auth__input {
   background: transparent;
-
   border: none;
   border-bottom: 1px solid #111111;
-
   padding: 0.7rem 0;
-
   font-family: "Courier New", monospace;
-
   font-size: 0.95rem;
-
   color: #111111;
 }
 
-
-.auth-form input:focus {
+.auth__input:focus {
   outline: none;
+  border-bottom-color: #555555;
 }
 
-
-/* ---------- BUTTONS ---------- */
-
-.auth-form button {
+.auth__button {
   margin-top: 1.5rem;
-
   background: none;
-
   border: 1px solid #111111;
-
   padding: 0.8rem;
-
   cursor: pointer;
-
   font-family: "Courier New", monospace;
-
   font-size: 0.85rem;
-
   font-weight: 700;
-
   letter-spacing: 1px;
-
-  transition: background-color 0.15s;
+  transition: background-color 0.15s ease;
 }
 
-
-.auth-form button:hover {
+.auth__button:hover {
   background-color: rgba(17, 17, 17, 0.06);
 }
 
+/* ---------------------------------
+   FOOTER
+--------------------------------- */
 
-/* ---------- FOOTER ---------- */
-
-.auth-footer {
+.auth__footer {
   padding-top: 1rem;
-
   border-top: 1px dashed rgba(17, 17, 17, 0.4);
-
   text-align: center;
-
   font-family: "Courier New", monospace;
-
   font-size: 0.75rem;
-
   letter-spacing: 1.5px;
-
   text-transform: uppercase;
-
   color: #555555;
+}
+
+/* ---------------------------------
+   FLASH
+--------------------------------- */
+
+.auth__flash {
+  margin-bottom: 1rem;
+  padding: 0.8rem;
+  border-left: 3px solid #111111;
+  background-color: rgba(17, 17, 17, 0.03);
+}
+
+.auth__flash-message {
+  font-family: "Courier New", monospace;
+  font-size: 0.8rem;
+  color: #111111;
+  margin: 0;
 }

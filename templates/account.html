@@ -6,137 +6,101 @@ Account
 
 {% block content %}
 
-<section class="account-page">
+<div class="account">
 
-  <div class="account-header">
-
-    <h2 class="account-title">
-      OPERATOR PROFILE
+  <div class="account__header">
+    <h2 class="account__title">
+      YOUR PROFILE
     </h2>
 
-    <p class="account-subtitle">
+    <p class="account__subtitle">
       authenticated personnel record
     </p>
 
+    <div class="account__header-divider"></div>
   </div>
 
-
-  <div class="profile-body">
-
-    <div class="profile-symbol">
-
-      <div class="symbol-circle"></div>
-
-      <div class="symbol-line"></div>
-
-      <div class="symbol-line"></div>
-
-    </div>
-
-
-    <h3 class="profile-name">
+  <div class="account__body">
+    <h3 class="account__username">
       {{ user.username }}
     </h3>
 
-    <div class="profile-id">
-      operator #{{ user.id }}
+    <div class="account__id">
+      user #{{ user.id }}
     </div>
 
-    <div class="profile-email">
+    <div class="account__email">
       {{ user.email }}
     </div>
 
+    <div class="account__divider"></div>
 
-    <div class="profile-divider"></div>
-
-
-    <div class="stats-row">
-
-      <div class="stat">
-
-        <div class="stat-value">
+    <div class="account__stats">
+      <div class="account__stat">
+        <div class="account__stat-value">
           {{ notes_count }}
         </div>
-
-        <div class="stat-label">
+        <div class="account__stat-label">
           NOTES
         </div>
-
       </div>
 
-      <div class="stat">
-
-        <div class="stat-value">
+      <div class="account__stat">
+        <div class="account__stat-value">
           {{ comments_count }}
         </div>
-
-        <div class="stat-label">
+        <div class="account__stat-label">
           COMMENTS
         </div>
-
       </div>
 
-      <div class="stat">
-
-        <div class="stat-value">
+      <div class="account__stat">
+        <div class="account__stat-value">
           {{ user.created_at.strftime("%Y") }}
         </div>
-
-        <div class="stat-label">
+        <div class="account__stat-label">
           JOINED
         </div>
-
       </div>
-
     </div>
 
+    <div class="account__divider"></div>
 
-    <div class="profile-divider"></div>
-
-
-    <div class="record-block">
-
-      <div class="record-line">
+    <div class="account__record">
+      <div class="account__record-line">
         <span>USERNAME</span>
         <span>{{ user.username }}</span>
       </div>
 
-      <div class="record-line">
+      <div class="account__record-line">
         <span>EMAIL</span>
         <span>{{ user.email }}</span>
       </div>
 
-      <div class="record-line">
+      <div class="account__record-line">
         <span>USER ID</span>
         <span>#{{ user.id }}</span>
       </div>
 
-      <div class="record-line">
+      <div class="account__record-line">
         <span>NOTES STORED</span>
         <span>{{ notes_count }}</span>
       </div>
 
-      <div class="record-line">
+      <div class="account__record-line">
         <span>COMMENTS SENT</span>
         <span>{{ comments_count }}</span>
       </div>
-
     </div>
-
   </div>
 
-  <div class="account-controls">
-
-    <a
-        href="/logout"
-        class="logout-link"
-    >
-        LOGOUT
+  <div class="account__footer">
+    <a href="/logout" class="account__logout-link">
+      LOGOUT
     </a>
-  
   </div>
 
-</section>
+</div>
 
 {% endblock %}
 

@@ -1,183 +1,120 @@
 {% extends "layout.html" %}
 
 {% block content %}
-<section class="training-page">
 
-  <div class="training-container">
+<div class="training">
 
-    <!-- CONFIGURATION -->
+  <div class="training__container">
 
-    <div class="training-config">
-
-      <div class="character-groups">
-
-        <label class="group-option">
+    <!-- CONFIGURATION SECTION -->
+    <div class="training__config">
+      <div class="training__character-groups">
+        <label class="training__group-option">
           <input type="checkbox" id="letters" checked>
           <span>LETTERS</span>
         </label>
 
-        <label class="group-option">
+        <label class="training__group-option">
           <input type="checkbox" id="numbers" checked>
           <span>NUMBERS</span>
         </label>
 
-        <label class="group-option">
+        <label class="training__group-option">
           <input type="checkbox" id="symbols">
           <span>SYMBOLS</span>
         </label>
-
       </div>
 
-      <div class="length-control">
-
-        <label for="exerciseLength">
-          TEXT LENGTH
+      <div class="training__length-control">
+        <label for="exercise-length">
+          EXERCISE LENGTH
         </label>
-
-        <select id="exerciseLength">
+        <select id="exercise-length" class="training__length-select">
           <option>10</option>
           <option selected>25</option>
           <option>50</option>
           <option>100</option>
         </select>
+      </div>
+    </div>
 
+    <!-- TRAINING STATUS PANELS -->
+    <div class="training__info">
+      <div class="training__info-block training__info-block--main">
+        <div class="training__info-label">AVAILABLE CHARACTERS</div>
+        <div id="available-characters" class="training__info-value training__characters-display">
+          K M
+        </div>
       </div>
 
+      <div class="training__info-block training__info-block--small">
+        <div class="training__info-label">CURRENT LESSON</div>
+        <div id="current-lesson" class="training__info-value">1</div>
+      </div>
+
+      <div class="training__info-block training__info-block--small">
+        <div class="training__info-label">LAST RESULT</div>
+        <div id="last-result" class="training__info-value">—</div>
+      </div>
     </div>
 
-
-    <!-- TRAINING STATUS -->
-
-    <div class="training-info">
-
-    <div class="info-block characters-block">
-
-        <div class="info-label">
-        AVAILABLE CHARACTERS
-        </div>
-
-        <div id="availableCharacters" class="info-value characters-display">
-        K M
-        </div>
-
-    </div>
-
-    <div class="info-block small-info-block">
-
-        <div class="info-label">
-        CURRENT LESSON
-        </div>
-
-        <div id="currentLesson" class="info-value">
-        1
-        </div>
-
-    </div>
-
-    <div class="info-block small-info-block">
-
-        <div class="info-label">
-        LAST RESULT
-        </div>
-
-        <div id="lastResult" class="info-value">
-        —
-        </div>
-
-    </div>
-
-    </div>
-
-
-    <!-- USER INPUT -->
-
-    <textarea
-      id="userCopy"
-      class="training-input"
-      placeholder="Type the transmission as you hear it..."
-    ></textarea>
-
+    <!-- USER INPUT AREA -->
+    <textarea id="user-copy"
+          class="training__input"
+          placeholder="Select character groups (LETTERS/NUMBERS/SYMBOLS) and TEXT LENGTH. Press START to hear Morse code, then type what you hear here (no spaces). Press EVALUATE to check accuracy (90%+ unlocks new characters). Adjust TIME UNIT slider for speed. Press STOP to cancel the exercise."></textarea>
 
     <!-- EVALUATION PANEL -->
-
-    <div class="evaluation-panel">
-
-      <div class="evaluation-column">
-
-        <div class="evaluation-label">
-          EXPECTED
-        </div>
-
-        <div id="expectedText" class="evaluation-box">
-          —
-        </div>
-
+    <div class="training__evaluation">
+      <div class="training__evaluation-column">
+        <div class="training__evaluation-label">EXPECTED</div>
+        <div id="expected-text" class="training__evaluation-box">—</div>
       </div>
 
-      <div class="evaluation-column small-column">
-
-        <div class="evaluation-label">
-          ACCURACY
-        </div>
-
-        <div id="accuracyValue" class="evaluation-box">
-          —
-        </div>
-
+      <div class="training__evaluation-column training__evaluation-column--small">
+        <div class="training__evaluation-label">ACCURACY</div>
+        <div id="accuracy-value" class="training__evaluation-box">—</div>
       </div>
-
     </div>
 
-
     <!-- FOOTER -->
+    <div class="training__footer">
+      <div class="training__divider"></div>
 
-    <div class="training-footer">
-
-      <div class="footer-dashed"></div>
-
-      <div class="footer-controls">
-
-        <button id="startButton" class="control-button">
+      <div class="training__controls">
+        <button id="start-btn" class="training__control-btn">
           START
         </button>
 
-        <button id="stopButton" class="control-button">
+        <button id="stop-btn" class="training__control-btn">
           STOP
         </button>
 
-        <button id="evaluateButton" class="control-button">
+        <button id="evaluate-btn" class="training__control-btn">
           EVALUATE
         </button>
 
-        <span class="time-label">
-          TIME UNIT
-        </span>
+        <div class="time-control">
+          <span class="time-control__label">TIME UNIT</span>
 
-        <input
-          type="range"
-          id="timeSlider"
-          class="time-slider"
-          min="100"
-          max="1000"
-          value="200"
-          step="50"
-        >
+          <input type="range"
+                 id="time-slider"
+                 class="time-control__slider"
+                 min="100"
+                 max="1000"
+                 value="200"
+                 step="50"
+                 aria-label="Morse code time unit in milliseconds">
 
-        <span id="timeValue" class="time-value">
-          200
-        </span>
-
-        <span class="time-unit-ms">
-          ms
-        </span>
-
+          <span id="time-value" class="time-control__value">200</span>
+          <span class="time-control__unit">ms</span>
+        </div>
       </div>
-
     </div>
 
   </div>
 
-</section>
+</div>
+
 {% endblock %}
 
 {% block links %}

@@ -1,225 +1,174 @@
-/* translator.css */
+/* ---------------------------------
+   TRANSLATOR PAGE - Main container
+--------------------------------- */
 
-/* ---------- PAGE LAYOUT ---------- */
-
-.translator-page {
+.translator {
   height: 100%;
 }
 
+/* ---------------------------------
+   MAIN CONTAINER
+--------------------------------- */
 
-/* ---------- MAIN CONTAINER ---------- */
-
-.translator-container {
+.translator__container {
   height: 100%;
-
   display: flex;
   flex-direction: column;
 }
 
+/* ---------------------------------
+   TWO PANEL LAYOUT
+--------------------------------- */
 
-/* ---------- HEADER (removed, spacing adjusted) ---------- */
-
-/* Title section completely removed, panels now take the extra space */
-
-
-/* ---------- TWO PANEL LAYOUT ---------- */
-
-.translator-grid {
+.translator__grid {
   flex: 1;
-
   display: flex;
   gap: 0;
-
   min-height: 0;
 }
 
+/* ---------------------------------
+   PANELS
+--------------------------------- */
 
-/* ---------- PANELS ---------- */
-
-.translator-panel {
+.translator__panel {
   flex: 1;
-
   display: flex;
   flex-direction: column;
-
   min-height: 0;
 }
 
-
-/* ---------- PANEL TITLES ---------- */
-
-.panel-label {
+.translator__panel-label {
   padding: 0 1.5rem 1rem 1.5rem;
-
   font-family: "DM Serif Display", serif;
   font-size: 1.5rem;
   font-weight: 600;
-
   letter-spacing: 1px;
   color: #111111;
 }
 
-
-/* ---------- CENTER DIVIDER ---------- */
-
-.panel-divider {
+/* Vertical divider between panels */
+.translator__divider {
   width: 3px;
-
   background-color: #111111;
-
   margin: 0 1rem;
 }
 
+/* ---------------------------------
+   TEXTAREAS
+--------------------------------- */
 
-/* ---------- TEXT AREAS ---------- */
-
-.translator-input {
+.translator__input {
   flex: 1;
-
   min-height: 0;
-
   background: transparent;
   border: none;
   outline: none;
-
   resize: none;
-
   padding: 0 1.5rem 1.5rem 1.5rem;
-
   font-family: "Courier New", monospace;
   font-size: 1.2rem;
   line-height: 1.7;
-
   color: #111111;
 }
 
-
-.translator-input::placeholder {
+.translator__input::placeholder {
   color: #999999;
   font-size: 1.1rem;
 }
 
+/* ---------------------------------
+   FOOTER
+--------------------------------- */
 
-/* ---------- FOOTER ---------- */
-
-.translator-footer {
+.translator__footer {
   margin-top: auto;
-
   width: 100%;
-
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
-
   padding-top: 1.5rem;
 }
 
-
-/* ---------- DASHED LINE ---------- */
-
-.footer-dashed {
+/* Dashed divider line */
+.translator__divider-line {
   width: 100%;
-
   border-top: 1px dashed rgba(17, 17, 17, 0.45);
 }
 
+/* ---------------------------------
+   TIME CONTROL COMPONENT
+   (Matches all other pages)
+--------------------------------- */
 
-/* ---------- TIME UNIT CONTROL ---------- */
-
-.time-unit-control {
+.time-control {
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 1rem;
-
   padding-bottom: 0.5rem;
-
   font-family: "Courier New", monospace;
   font-size: 0.85rem;
   font-weight: 700;
-
   text-transform: uppercase;
   letter-spacing: 1px;
-
   color: #111111;
 }
 
-
-.time-label,
-.time-unit-ms {
+.time-control__label,
+.time-control__unit {
   color: #555555;
 }
 
+.time-control__play-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.2rem;
+  width: 24px;
+  height: 24px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: opacity 0.2s ease;
+  line-height: 1;
+}
 
-/* ---------- SLIDER ---------- */
+.time-control__play-btn:hover {
+  opacity: 0.7;
+}
 
-.time-slider {
+.time-control__slider {
   width: 280px;
   height: 2px;
-
   appearance: none;
   background-color: #111111;
-
   cursor: pointer;
   outline: none;
 }
 
-
-.time-slider::-webkit-slider-thumb {
+/* WebKit browsers */
+.time-control__slider::-webkit-slider-thumb {
   appearance: none;
-
   width: 12px;
   height: 12px;
-
   background-color: #111111;
   border: none;
-
   cursor: pointer;
 }
 
-
-.time-slider::-moz-range-thumb {
+/* Firefox */
+.time-control__slider::-moz-range-thumb {
   width: 12px;
   height: 12px;
-
   background-color: #111111;
   border: none;
-
   cursor: pointer;
 }
 
-
-/* ---------- VALUE ---------- */
-
-.time-value {
+.time-control__value {
   min-width: 40px;
-
   text-align: center;
   font-weight: 700;
-}
-
-/* ---------- PLAY BUTTON ---------- */
-
-.play-button {
-  background: none;
-  border: none;
-  cursor: pointer;
-  
-  font-size: 1.2rem;
-  color: #111111;
-  
-  width: 24px;
-  height: 24px;
-  padding: 0;
-  margin: 0;
-  
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  
-  flex-shrink: 0;
-  
-  transition: opacity 0.2s;
-  
-  line-height: 1;
 }

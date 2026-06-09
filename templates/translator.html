@@ -1,48 +1,60 @@
-<!-- translator.html -->
 {% extends "layout.html" %}
 
 {% block content %}
-<section class="translator-page">
 
-  <div class="translator-container">
-    
-    <!-- Title removed as requested -->
+<div class="translator">
 
+  <div class="translator__container">
     <!-- Two-panel layout -->
-    <div class="translator-grid">
+    <div class="translator__grid">
       
       <!-- TEXT PANEL -->
-      <div class="translator-panel">
-        <div class="panel-label">TEXT</div>
-        <textarea id="textInput" class="translator-input" placeholder="Enter your message..."></textarea>
+      <div class="translator__panel">
+        <div class="translator__panel-label">TEXT</div>
+        <textarea id="text-input" 
+                  class="translator__input" 
+                  placeholder="Enter your message..."></textarea>
       </div>
 
       <!-- DIVIDER LINE -->
-      <div class="panel-divider"></div>
+      <div class="translator__divider"></div>
 
       <!-- MORSE PANEL -->
-      <div class="translator-panel">
-        <div class="panel-label">MORSE</div>
-        <textarea id="morseInput" class="translator-input" placeholder=".-.-..-./-.-----..-.-./--........---...-.-.-.-.-.-.-.-.-"></textarea>
+      <div class="translator__panel">
+        <div class="translator__panel-label">MORSE</div>
+        <textarea id="morse-input" 
+                  class="translator__input" 
+                  placeholder=".-.-..-./-.-----..-.-./--........---...-.-.-.-.-.-.-.-.-"></textarea>
       </div>
-
     </div>
 
-    <div class="translator-footer">
-      <div class="footer-dashed"></div>
+    <div class="translator__footer">
+      <div class="translator__divider-line"></div>
       
-      <div class="time-unit-control">
-        <button id="playButton" class="play-button">▶</button>
-        <span class="time-label">TIME UNIT</span>
-        <input type="range" id="timeSlider" class="time-slider" min="100" max="1000" value="200" step="50">
-        <span id="timeValue" class="time-value">200</span>
-        <span class="time-unit-ms">ms</span>
+      <div class="time-control">
+        <button id="play-btn" class="time-control__play-btn" aria-label="Play morse code">
+          ▶
+        </button>
+        
+        <span class="time-control__label">TIME UNIT</span>
+        
+        <input type="range" 
+               id="time-slider" 
+               class="time-control__slider" 
+               min="100" 
+               max="1000" 
+               value="200" 
+               step="50"
+               aria-label="Morse code time unit in milliseconds">
+        
+        <span id="time-value" class="time-control__value">200</span>
+        <span class="time-control__unit">ms</span>
       </div>
     </div>
-
   </div>
 
-</section>
+</div>
+
 {% endblock %}
 
 {% block links %}

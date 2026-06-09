@@ -1,301 +1,399 @@
+// ============================================================
+// TELEGRAPH MORSE KEY
+// Virtual telegraph key with mouse/keyboard/touch support
+// ============================================================
+
 import { beep } from "./utils.js";
 
-const key = document.getElementById("telegraphKey");
-const output = document.getElementById("telegraphOutput");
-const meter = document.getElementById("timeSlider");
-const timeValue = document.getElementById("timeValue");
-const playButton = document.getElementById("playButton");
-const clearButton = document.getElementById("clearButton");
-const noteButton = document.getElementById("saveNoteButton");
-const commentButton = document.getElementById("commentButton");
+// ============================================================
+// DOM ELEMENTS
+// ============================================================
 
-let interrupt = true;
+const key = document.getElementById("telegraph-key");
+const output = document.getElementById("telegraph-output");
+const timeSlider = document.getElementById("time-slider");
+const timeDisplay = document.getElementById("time-value");
+const playButton = document.getElementById("play-btn");
+const clearButton = document.getElementById("clear-btn");
+const saveNoteButton = document.getElementById("save-note-btn");
+const commentButton = document.getElementById("comment-btn");
 
-let unit = parseInt(meter.value);
+// ============================================================
+// TELEGRAPH STATE
+// ============================================================
 
-timeValue.textContent = unit;
+let timeUnit = parseInt(timeSlider.value);
+timeDisplay.textContent = timeUnit;
 
-let mouseDown = false;
-let spaceDown = false;
-let isPressed = false;
+// Press state tracking
+let mousePressed = false;
+let spacePressed = false;
+let isKeyPressed = false;
 
-let pressStart = 0;
-let lastRelease = 0;
+// Timing for Morse classification
+let pressStartTime = 0;
+let lastReleaseTime = 0;
 
-let audioCtx = null;
-let oscillator = null;
-let gainNode = null;
+// Audio for key tone
+let audioContext = null;
+let currentOscillator = null;
+let currentGain = null;
 
-/* ---------- TIME UNIT ---------- */
+// Playback state
+let isPlaying = false;
 
-meter.addEventListener("input", (event) => {
-  unit = parseInt(event.target.value);
-  timeValue.textContent = unit;
+// ============================================================
+// TIME CONTROL
+// ============================================================
+
+timeSlider.addEventListener("input", (event) => {
+  timeUnit = parseInt(event.target.value);
+  timeDisplay.textContent = timeUnit;
 });
 
-/* ---------- AUDIO ---------- */
+// ============================================================
+// TELEGRAPH KEY AUDIO (Sustained tone)
+// ============================================================
 
-function startTone() {
-  if (!audioCtx) {
-    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+/**
+ * Start playing the telegraph key tone
+ * Creates a 600Hz sine wave that fades in smoothly
+ */
+function startKeyTone() {
+  if (!audioContext) {
+    audioContext = new (window.AudioContext || window.webkitAudioContext)();
   }
 
-  oscillator = audioCtx.createOscillator();
-  gainNode = audioCtx.createGain();
+  currentOscillator = audioContext.createOscillator();
+  currentGain = audioContext.createGain();
 
-  oscillator.type = "sine";
-  oscillator.frequency.value = 600;
+  currentOscillator.type = "sine";
+  currentOscillator.frequency.value = 600;
 
-  gainNode.gain.setValueAtTime(0, audioCtx.currentTime);
-  gainNode.gain.linearRampToValueAtTime(0.1, audioCtx.currentTime + 0.01);
+  // Quick fade-in to avoid click/pop
+  currentGain.gain.setValueAtTime(0, audioContext.currentTime);
+  currentGain.gain.linearRampToValueAtTime(
+    0.1,
+    audioContext.currentTime + 0.01,
+  );
 
-  oscillator.connect(gainNode);
-  gainNode.connect(audioCtx.destination);
+  currentOscillator.connect(currentGain);
+  currentGain.connect(audioContext.destination);
 
-  oscillator.start();
+  currentOscillator.start();
 }
 
-function stopTone() {
-  if (!oscillator) return;
+/**
+ * Stop the telegraph key tone with a quick fade-out
+ */
+function stopKeyTone() {
+  if (!currentOscillator) return;
 
-  gainNode.gain.cancelScheduledValues(audioCtx.currentTime);
+  // Cancel any scheduled gain changes
+  currentGain.gain.cancelScheduledValues(audioContext.currentTime);
 
-  gainNode.gain.setValueAtTime(gainNode.gain.value, audioCtx.currentTime);
+  // Fade out smoothly to avoid click
+  currentGain.gain.setValueAtTime(
+    currentGain.gain.value,
+    audioContext.currentTime,
+  );
+  currentGain.gain.linearRampToValueAtTime(0, audioContext.currentTime + 0.01);
 
-  gainNode.gain.linearRampToValueAtTime(0, audioCtx.currentTime + 0.01);
+  currentOscillator.stop(audioContext.currentTime + 0.01);
 
-  oscillator.stop(audioCtx.currentTime + 0.01);
-
-  oscillator = null;
-  gainNode = null;
+  currentOscillator = null;
+  currentGain = null;
 }
 
-/* ---------- MORSE CLASSIFICATION ---------- */
+// ============================================================
+// MORSE CLASSIFICATION
+// ============================================================
 
-function classify(duration) {
-  if (duration < unit * 1.5) {
-    return ".";
-  }
-
-  return "-";
+/**
+ * Classify a press duration as dot or dash
+ * Dot: less than 1.5 time units
+ * Dash: 1.5 time units or more
+ */
+function classifyPress(durationMs) {
+  return durationMs < timeUnit * 1.5 ? "." : "-";
 }
 
-/* ---------- OUTPUT ---------- */
+// ============================================================
+// OUTPUT MANAGEMENT
+// ============================================================
 
+/**
+ * Add a symbol (dot or dash) to the output and auto-scroll
+ */
 function appendSymbol(symbol) {
   output.textContent += symbol;
-
   output.scrollTop = output.scrollHeight;
 }
 
-/* ---------- PRESS LOGIC ---------- */
+/**
+ * Determine and add spacing between letters/words
+ * Rules:
+ * - 3+ time units gap → space between letters
+ * - 7+ time units gap → slash between words
+ */
+function handleSpacing(currentTime) {
+  if (lastReleaseTime === 0) return;
 
+  const gap = currentTime - lastReleaseTime;
+
+  if (gap >= timeUnit * 7) {
+    output.textContent += " / ";
+  } else if (gap >= timeUnit * 3) {
+    output.textContent += " ";
+  }
+}
+
+// ============================================================
+// PRESS LOGIC
+// ============================================================
+
+/**
+ * Start a key press: record timing, add visual feedback, start tone
+ */
 function startPress() {
   const now = performance.now();
 
-  if (lastRelease !== 0) {
-    const gap = now - lastRelease;
+  // Add spacing between letters/words based on release gap
+  handleSpacing(now);
 
-    // word gap
-    if (gap >= unit * 7) {
-      output.textContent += " / ";
-    }
+  isKeyPressed = true;
+  pressStartTime = now;
 
-    // letter gap
-    else if (gap >= unit * 3) {
-      output.textContent += " ";
-    }
-  }
-
-  isPressed = true;
-  pressStart = now;
-
+  // Visual feedback
   key.classList.add("active");
 
-  startTone();
+  // Audio feedback
+  startKeyTone();
 }
 
+/**
+ * End a key press: classify duration, append dot/dash, stop tone
+ */
 function endPress() {
-  isPressed = false;
+  const duration = performance.now() - pressStartTime;
+  lastReleaseTime = performance.now();
 
-  const duration = performance.now() - pressStart;
+  isKeyPressed = false;
 
-  lastRelease = performance.now();
-
+  // Remove visual feedback
   key.classList.remove("active");
 
-  stopTone();
+  // Stop audio
+  stopKeyTone();
 
-  const symbol = classify(duration);
-
+  // Append the Morse symbol
+  const symbol = classifyPress(duration);
   appendSymbol(symbol);
 }
 
+/**
+ * Update press state based on mouse/keyboard/touch input
+ * Called whenever input state changes
+ */
 function updatePressState() {
-  const shouldBePressed = mouseDown || spaceDown;
+  const shouldBePressed = mousePressed || spacePressed;
 
-  if (shouldBePressed && !isPressed) {
+  if (shouldBePressed && !isKeyPressed) {
     startPress();
-  }
-
-  if (!shouldBePressed && isPressed) {
+  } else if (!shouldBePressed && isKeyPressed) {
     endPress();
   }
 }
 
-/* ---------- MOUSE ---------- */
+// ============================================================
+// INPUT HANDLERS (Mouse, Keyboard, Touch)
+// ============================================================
 
+// ----- Mouse -----
 key.addEventListener("mousedown", () => {
-  mouseDown = true;
+  mousePressed = true;
   updatePressState();
 });
 
 document.addEventListener("mouseup", () => {
-  mouseDown = false;
+  mousePressed = false;
   updatePressState();
 });
 
-/* ---------- KEYBOARD ---------- */
-
+// ----- Keyboard (Spacebar) -----
 document.addEventListener("keydown", (event) => {
   if (event.code !== "Space") return;
 
-  event.preventDefault();
+  event.preventDefault(); // Prevent page scrolling
 
-  if (spaceDown) return;
-
-  spaceDown = true;
-
+  if (spacePressed) return; // Prevent repeat triggers
+  spacePressed = true;
   updatePressState();
 });
 
 document.addEventListener("keyup", (event) => {
   if (event.code !== "Space") return;
 
-  spaceDown = false;
-
+  spacePressed = false;
   updatePressState();
 });
 
-/* ---------- TOUCH ---------- */
-
+// ----- Touch (Mobile) -----
 key.addEventListener("touchstart", (event) => {
-  event.preventDefault();
-
-  mouseDown = true;
-
+  event.preventDefault(); // Prevent page zoom/scroll
+  mousePressed = true;
   updatePressState();
 });
 
 document.addEventListener("touchend", () => {
-  mouseDown = false;
-
+  mousePressed = false;
   updatePressState();
 });
 
-/* ---------- SAFETY ---------- */
-
+// ----- Safety: Release if window loses focus -----
 window.addEventListener("blur", () => {
-  mouseDown = false;
-  spaceDown = false;
+  mousePressed = false;
+  spacePressed = false;
 
-  if (isPressed) {
+  if (isKeyPressed) {
     updatePressState();
   }
 });
 
+// ============================================================
+// PLAYBACK BUTTON
+// ============================================================
+
 playButton.addEventListener("click", async () => {
-  if (!interrupt) {
-    interrupt = true;
+  // Stop playback if currently playing
+  if (isPlaying) {
+    isPlaying = false;
     playButton.textContent = "▶";
     return;
   }
 
-  if (audioCtx == null) {
-    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  const morseText = output.textContent;
+  if (!morseText.trim()) return;
+
+  // Initialize audio context if needed
+  if (!audioContext) {
+    audioContext = new (window.AudioContext || window.webkitAudioContext)();
   }
 
-  interrupt = false;
+  // Resume if suspended (browser autoplay policy)
+  if (audioContext.state === "suspended") {
+    await audioContext.resume();
+  }
+
+  isPlaying = true;
   playButton.textContent = "■";
-  const timeUnit = Number(meter.value);
-  const morseChars = [...output.textContent];
 
-  for (const char of morseChars) {
-    if (interrupt === true) {
-      break;
-    }
+  const morseSequence = [...morseText];
 
-    if (char === ".") {
-      beep(audioCtx, timeUnit * 1);
-      await new Promise((resolve) => setTimeout(resolve, timeUnit * 2));
-    } else if (char === "-") {
-      beep(audioCtx, timeUnit * 3);
-      await new Promise((resolve) => setTimeout(resolve, timeUnit * 4));
-    } else if (char === " ") {
-      await new Promise((resolve) => setTimeout(resolve, timeUnit * 2));
-    } else if (char === "/") {
-      await new Promise((resolve) => setTimeout(resolve, timeUnit * 6));
+  for (const symbol of morseSequence) {
+    if (!isPlaying) break;
+
+    if (symbol === ".") {
+      beep(audioContext, timeUnit);
+      await sleep(timeUnit * 2); // Dot: 1 unit sound + 1 unit pause
+    } else if (symbol === "-") {
+      beep(audioContext, timeUnit * 3);
+      await sleep(timeUnit * 4); // Dash: 3 units sound + 1 unit pause
+    } else if (symbol === " ") {
+      await sleep(timeUnit * 2); // Space between letters
+    } else if (symbol === "/") {
+      await sleep(timeUnit * 6); // Slash between words
     }
   }
 
-  interrupt = true;
+  isPlaying = false;
   playButton.textContent = "▶";
 });
 
+// ============================================================
+// CLEAR BUTTON
+// ============================================================
+
 clearButton.addEventListener("click", () => {
-  pressStart = 0;
-  lastRelease = 0;
+  // Reset timing state
+  pressStartTime = 0;
+  lastReleaseTime = 0;
   output.textContent = "";
 });
 
-noteButton?.addEventListener("click", async () => {
-  const content = output.textContent;
+// ============================================================
+// SAVE NOTE BUTTON (Only visible when logged in)
+// ============================================================
 
-  if (!content.trim()) return;
+saveNoteButton?.addEventListener("click", async () => {
+  const content = output.textContent.trim();
+  if (!content) return;
 
-  const response = await fetch("/api/notes", {
-    method: "POST",
+  try {
+    const response = await fetch("/api/notes", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ content }),
+    });
 
-    headers: {
-      "Content-Type": "application/json",
-    },
-
-    body: JSON.stringify({
-      content,
-    }),
-  });
-
-  if (response.ok) {
-    noteButton.textContent = "✓";
-
-    setTimeout(() => {
-      noteButton.textContent = "✎";
-    }, 1000);
+    if (response.ok) {
+      // Temporary success indicator
+      const originalText = saveNoteButton.textContent;
+      saveNoteButton.textContent = "✓";
+      setTimeout(() => {
+        saveNoteButton.textContent = originalText;
+      }, 1000);
+    } else if (response.status === 401) {
+      alert("Please log in to save notes.");
+    } else {
+      alert("Failed to save note.");
+    }
+  } catch (error) {
+    console.error("Save note error:", error);
+    alert("Could not save note. Please try again.");
   }
 });
+
+// ============================================================
+// POST TO comments BUTTON (Only visible when logged in)
+// ============================================================
 
 commentButton?.addEventListener("click", async () => {
-  const content = output.textContent;
+  const content = output.textContent.trim();
+  if (!content) return;
 
-  if (!content.trim()) return;
+  try {
+    const response = await fetch("/api/comment", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ content }),
+    });
 
-  const response = await fetch("/api/comment", {
-    method: "POST",
-
-    headers: {
-      "Content-Type": "application/json",
-    },
-
-    body: JSON.stringify({
-      content,
-    }),
-  });
-
-  if (response.ok) {
-    commentButton.textContent = "✓";
-
-    setTimeout(() => {
-      commentButton.textContent = "✉";
-    }, 1000);
+    if (response.ok) {
+      // Temporary success indicator
+      const originalText = commentButton.textContent;
+      commentButton.textContent = "✓";
+      setTimeout(() => {
+        commentButton.textContent = originalText;
+      }, 1000);
+    } else if (response.status === 401) {
+      alert("Please log in to post to comments.");
+    } else {
+      alert("Failed to post comment.");
+    }
+  } catch (error) {
+    console.error("Post comment error:", error);
+    alert("Could not post to comments. Please try again.");
   }
 });
+
+// ============================================================
+// HELPER FUNCTIONS
+// ============================================================
+
+/**
+ * Sleep/pause execution for given milliseconds
+ */
+function sleep(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}

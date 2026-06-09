@@ -1,346 +1,266 @@
-/* ---------- PAGE ---------- */
+/* ---------------------------------
+   ARCHIVE PAGE - Main container
+--------------------------------- */
 
-.archives-page {
+.archive {
   height: 100%;
 }
 
-
-/* ---------- SHARED VIEWS ---------- */
-
-.archives-browser,
-.archive-reader {
+/* Shared views container */
+.archive__browser,
+.archive__reader {
   height: 100%;
-
   display: flex;
   flex-direction: column;
 }
 
-
-/* ---------- HIDDEN ---------- */
-
+/* Utility class */
 .hidden {
   display: none;
 }
 
+/* ---------------------------------
+   BROWSER VIEW - Header
+--------------------------------- */
 
-/* ---------- HEADER ---------- */
-
-.archives-header {
+.archive__header {
   display: flex;
   flex-direction: column;
   gap: 0.3rem;
 }
 
-
-.archives-title {
+.archive__title {
   font-family: "DM Serif Display", serif;
   font-size: 2.2rem;
   font-weight: 700;
 }
 
-
-.archives-subtitle {
+.archive__subtitle {
   font-family: "Courier New", monospace;
   font-size: 0.75rem;
-
   text-transform: uppercase;
   letter-spacing: 1px;
-
   color: #555555;
 }
 
+/* ---------------------------------
+   BROWSER VIEW - Table
+--------------------------------- */
 
-/* ---------- TABLE AREA ---------- */
-
-.archives-table-wrapper {
+.archive__table-wrapper {
   flex: 1;
-
   min-height: 0;
-
   overflow-y: auto;
-
   margin-top: 1.5rem;
-
   border-top: 2px solid #111111;
   border-bottom: 2px solid #111111;
 }
 
-
-/* ---------- TABLE ---------- */
-
-.archives-table {
+.archive__table {
   width: 100%;
   border-collapse: collapse;
 }
 
-
-.archives-table thead {
+/* Sticky header */
+.archive__table thead {
   position: sticky;
   top: 0;
-
-  z-index: 10;
-
+  z-index: 20;
   background-color: #FEF7E6;
-
-  border-bottom: 2px solid #111111;
+  box-shadow: 0 2px 0 #111111;
 }
 
-
-.archives-table th {
+.archive__table th {
   padding: 1rem;
-
   text-align: left;
-
   background-color: #FEF7E6;
-
   font-family: "DM Serif Display", serif;
   font-size: 0.9rem;
   letter-spacing: 1px;
 }
 
-
-.archives-table td {
+.archive__table td {
   padding: 1.2rem 1rem;
   vertical-align: top;
 }
 
-
-.archive-row {
+/* Table rows */
+.archive__row {
   cursor: pointer;
 }
 
-
-.archive-row:hover {
+.archive__row:hover {
   background-color: rgba(17, 17, 17, 0.06);
 }
 
-
-/* ---------- TABLE TYPOGRAPHY ---------- */
-
-.entry-title {
+/* Cell typography */
+.archive__cell-title {
   font-family: "DM Serif Display", serif;
   font-size: 1rem;
   font-weight: 600;
 }
 
-
-.entry-preview {
+.archive__cell-preview {
   font-family: "Courier New", monospace;
   font-size: 0.8rem;
-
   color: #333333;
   line-height: 1.4;
-
   white-space: normal;
   word-break: break-word;
 }
 
-
-.entry-meta {
+.archive__cell-meta {
   font-family: "Courier New", monospace;
   font-size: 0.8rem;
-
   color: #555555;
-
   white-space: nowrap;
 }
 
-
-/* ---------- TABLE FOOTER ---------- */
-
-.archives-footer {
+/* Browser footer */
+.archive__footer-note {
   margin-top: 1.5rem;
-
   padding-top: 1rem;
-
   text-align: center;
-
   border-top: 1px dashed rgba(17, 17, 17, 0.4);
-
   font-family: "Courier New", monospace;
   font-size: 0.75rem;
-
   letter-spacing: 1.5px;
   text-transform: uppercase;
-
   color: #555555;
 }
 
+/* ---------------------------------
+   READER VIEW
+--------------------------------- */
 
-/* ================================================= */
-/* READER VIEW                                       */
-/* ================================================= */
-
-.archive-reader {
+.archive__reader {
   gap: 1.5rem;
 }
 
-
-/* ---------- READER HEADER ---------- */
-
-.reader-header {
+/* Reader header */
+.archive__reader-header {
   display: flex;
   flex-direction: column;
   gap: 1rem;
 }
 
-
-.reader-back-button {
+.archive__back-btn {
   align-self: flex-start;
-
   background: none;
   border: none;
-
   padding: 0;
-
   cursor: pointer;
-
   font-family: "Courier New", monospace;
   font-size: 0.85rem;
   font-weight: 700;
-
   letter-spacing: 1px;
-
   color: #555555;
 }
 
-
-.reader-back-button:hover {
+.archive__back-btn:hover {
   color: #111111;
 }
 
-
-.reader-title {
+.archive__reader-title {
   font-family: "DM Serif Display", serif;
   font-size: 2.2rem;
   font-weight: 700;
-
   color: #111111;
-
   text-align: center;
 }
 
-
-/* ---------- READER CONTENT ---------- */
-
-.reader-content {
+/* Reader content area */
+.archive__reader-content {
   flex: 1;
-
   min-height: 0;
-
   overflow-y: auto;
-
   border-top: 2px solid #111111;
   border-bottom: 2px solid #111111;
-
   padding: 2rem 0;
-
   font-family: "Courier New", monospace;
   font-size: 1rem;
-
   line-height: 1.8;
-
   color: #222222;
-
   white-space: pre-wrap;
   word-break: break-word;
 }
 
-
-/* ---------- READER FOOTER ---------- */
-
-.reader-footer {
+/* Reader footer */
+.archive__reader-footer {
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
 }
 
-
-/* ---------- DASHED LINE ---------- */
-
-.footer-dashed {
+/* Dashed divider (reused from codebook) */
+.archive__divider {
   border-top: 1px dashed rgba(17, 17, 17, 0.4);
 }
 
+/* ---------------------------------
+   TIME CONTROL COMPONENT
+   (Matches codebook.css for consistency)
+--------------------------------- */
 
-/* ---------- CONTROLS ---------- */
-
-.time-unit-control {
+.time-control {
   display: flex;
   justify-content: center;
   align-items: center;
-
   gap: 1rem;
-
   padding-bottom: 0.5rem;
-
   font-family: "Courier New", monospace;
   font-size: 0.85rem;
   font-weight: 700;
-
   text-transform: uppercase;
   letter-spacing: 1px;
+  color: #111111;
 }
 
-
-.time-label,
-.time-unit-ms {
+.time-control__label,
+.time-control__unit {
   color: #555555;
 }
 
-
-/* ---------- PLAY ---------- */
-
-.play-button {
+.time-control__play-btn {
   background: none;
   border: none;
-
   cursor: pointer;
-
   font-size: 1.2rem;
-
   width: 24px;
   height: 24px;
-
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-
-/* ---------- SLIDER ---------- */
-
-.time-slider {
+.time-control__slider {
   width: 280px;
   height: 2px;
-
   appearance: none;
-
   background-color: #111111;
+  cursor: pointer;
+  outline: none;
 }
 
-
-.time-slider::-webkit-slider-thumb {
+/* WebKit browsers */
+.time-control__slider::-webkit-slider-thumb {
   appearance: none;
-
   width: 12px;
   height: 12px;
-
   background-color: #111111;
+  cursor: pointer;
 }
 
-
-.time-slider::-moz-range-thumb {
+/* Firefox */
+.time-control__slider::-moz-range-thumb {
   width: 12px;
   height: 12px;
-
   border: none;
-
   background-color: #111111;
+  cursor: pointer;
 }
 
-
-.time-value {
+.time-control__value {
   min-width: 40px;
   text-align: center;
 }

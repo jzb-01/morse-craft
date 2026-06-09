@@ -1,133 +1,187 @@
-import { conversionTable } from "./data.js";
 import { beep } from "./utils.js";
 
-const browserView = document.getElementById("archivesBrowser");
-const readerView = document.getElementById("archiveReader");
+// ============================================================
+// NOTES PAGE - Personal notes with Morse playback
+// ============================================================
 
-const readerTitle = document.getElementById("readerTitle");
-const readerContent = document.getElementById("readerContent");
+// DOM Elements - using refactored class/id names
+const browserView = document.getElementById("notes-browser");
+const readerView = document.getElementById("notes-reader");
 
-const backButton = document.getElementById("readerBackButton");
+const readerTitle = document.getElementById("reader-title");
+const readerContent = document.getElementById("reader-content");
 
-const tableBody = document.querySelector(".archives-table tbody");
+const backButton = document.getElementById("reader-back-btn");
 
-const meter = document.getElementById("timeSlider");
-const timeValue = document.getElementById("timeValue");
+const tableBody = document.querySelector(".notes__table tbody");
 
-const playButton = document.getElementById("playButton");
-const deleteButton = document.getElementById("deleteButton");
+const timeSlider = document.getElementById("time-slider");
+const timeDisplay = document.getElementById("time-value");
 
-let audioCtx = null;
-let interrupt = true;
+const playButton = document.getElementById("play-btn");
+const deleteButton = document.getElementById("delete-btn");
 
-// --------------------------------------------------
-// TIME UNIT DISPLAY
-// --------------------------------------------------
+// Audio state
+let audioContext = null;
+let isPlaying = false; // Tracks if Morse playback is active
+let currentNoteId = null; // Track which note is currently open
 
-meter.addEventListener("input", () => {
-  timeValue.textContent = meter.value;
+// ============================================================
+// UI EVENT HANDLERS
+// ============================================================
+
+// Update time value display when slider moves
+timeSlider.addEventListener("input", () => {
+  timeDisplay.textContent = timeSlider.value;
 });
 
-// --------------------------------------------------
-// OPEN ARCHIVE
-// --------------------------------------------------
-
+// Load and display a note when a row is clicked
 tableBody?.addEventListener("click", async (event) => {
-  const row = event.target.closest(".archive-row");
-
-  if (!row) {
-    return;
-  }
+  const row = event.target.closest(".notes__row");
+  if (!row) return;
 
   const noteId = row.dataset.id;
 
   try {
     const response = await fetch(`/api/note/${noteId}`);
 
-    if (!response.ok) {
-      throw new Error("Failed to fetch note");
+    if (response.status === 401) {
+      alert("Please log in to view notes.");
+      window.location.href = "/auth";
+      return;
     }
+
+    if (response.status === 403) {
+      alert("You don't have permission to view this note.");
+      return;
+    }
+
+    if (!response.ok) throw new Error(`HTTP ${response.status}`);
 
     const note = await response.json();
 
     readerTitle.textContent = note.title;
     readerContent.textContent = note.content;
+    currentNoteId = note.id;
     deleteButton.dataset.id = note.id;
 
+    // Switch to reader view
     browserView.classList.add("hidden");
     readerView.classList.remove("hidden");
   } catch (error) {
-    console.error(error);
-
-    alert("Unable to load note.");
+    console.error("Failed to load note:", error);
+    alert("Unable to load transmission. Please try again.");
   }
 });
 
-// --------------------------------------------------
-// DELETE BUTTON
-// --------------------------------------------------
-
+// Delete the current note
 deleteButton?.addEventListener("click", async () => {
-  const noteId = deleteButton.dataset.id;
+  if (!currentNoteId) return;
 
-  if (!noteId) return;
+  // Ask for confirmation before deleting
+  const confirmDelete = confirm("Delete this note? This cannot be undone.");
+  if (!confirmDelete) return;
 
-  const response = await fetch(`/api/notedelete/${noteId}`, {
-    method: "DELETE",
-  });
+  try {
+    const response = await fetch(`/api/notedelete/${currentNoteId}`, {
+      method: "DELETE",
+    });
 
-  if (!response.ok) return;
+    if (response.status === 401) {
+      alert("Please log in to delete notes.");
+      window.location.href = "/auth";
+      return;
+    }
 
-  window.location.reload();
+    if (response.status === 403) {
+      alert("You don't have permission to delete this note.");
+      return;
+    }
+
+    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+
+    // Reload the page to refresh the notes list
+    window.location.reload();
+  } catch (error) {
+    console.error("Failed to delete note:", error);
+    alert("Unable to delete note. Please try again.");
+  }
 });
 
-// --------------------------------------------------
-// BACK BUTTON
-// --------------------------------------------------
-
+// Return to browser view
 backButton?.addEventListener("click", () => {
+  // Stop any ongoing playback before leaving
+  if (isPlaying) {
+    isPlaying = false;
+    playButton.textContent = "▶";
+  }
+
   readerView.classList.add("hidden");
   browserView.classList.remove("hidden");
 
+  // Clear reader content
   readerTitle.textContent = "";
   readerContent.textContent = "";
+  currentNoteId = null;
   deleteButton.dataset.id = "";
 });
 
+// Play or stop Morse code from the current note content
 playButton?.addEventListener("click", async () => {
-  if (!interrupt) {
-    interrupt = true;
+  // Stop playback if currently playing
+  if (isPlaying) {
+    isPlaying = false;
     playButton.textContent = "▶";
     return;
   }
 
-  if (audioCtx == null) {
-    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  // Initialize audio context on first play
+  if (!audioContext) {
+    audioContext = new (window.AudioContext || window.webkitAudioContext)();
   }
 
-  interrupt = false;
+  // Browsers require user gesture to start audio
+  if (audioContext.state === "suspended") {
+    await audioContext.resume();
+  }
+
+  isPlaying = true;
   playButton.textContent = "■";
-  const timeUnit = Number(meter.value);
-  const morseChars = [...readerContent.textContent];
 
-  for (const char of morseChars) {
-    if (interrupt === true) {
-      break;
-    }
+  const timeUnit = Number(timeSlider.value);
+  const morseText = readerContent.textContent;
 
-    if (char === ".") {
-      beep(audioCtx, timeUnit * 1);
-      await new Promise((resolve) => setTimeout(resolve, timeUnit * 2));
-    } else if (char === "-") {
-      beep(audioCtx, timeUnit * 3);
-      await new Promise((resolve) => setTimeout(resolve, timeUnit * 4));
-    } else if (char === " ") {
-      await new Promise((resolve) => setTimeout(resolve, timeUnit * 2));
-    } else if (char === "/") {
-      await new Promise((resolve) => setTimeout(resolve, timeUnit * 6));
+  // Play each character in the Morse string
+  for (const symbol of morseText) {
+    if (!isPlaying) break; // User stopped playback
+
+    if (symbol === ".") {
+      beep(audioContext, timeUnit);
+      await sleep(timeUnit * 2); // Dot: 1 unit sound + 1 unit pause
+    } else if (symbol === "-") {
+      beep(audioContext, timeUnit * 3);
+      await sleep(timeUnit * 4); // Dash: 3 units sound + 1 unit pause
+    } else if (symbol === " ") {
+      await sleep(timeUnit * 2); // Space between letters
+    } else if (symbol === "/") {
+      await sleep(timeUnit * 6); // Slash between words
     }
   }
 
-  interrupt = true;
+  // Playback finished or was stopped
+  isPlaying = false;
   playButton.textContent = "▶";
 });
+
+// ============================================================
+// HELPER FUNCTIONS
+// ============================================================
+
+/**
+ * Sleep/pause execution for given milliseconds
+ * @param {number} ms - Milliseconds to sleep
+ * @returns {Promise} Resolves after ms
+ */
+function sleep(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}

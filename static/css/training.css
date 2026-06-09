@@ -1,306 +1,275 @@
-/* ---------- PAGE ---------- */
+/* ---------------------------------
+   TRAINING PAGE - Main container
+--------------------------------- */
 
-.training-page {
+.training {
   height: 100%;
 }
 
+/* ---------------------------------
+   MAIN CONTAINER
+--------------------------------- */
 
-/* ---------- CONTAINER ---------- */
-
-.training-container {
+.training__container {
   height: 100%;
-
   display: flex;
   flex-direction: column;
-
   gap: 1rem;
 }
 
+/* ---------------------------------
+   CONFIGURATION SECTION
+--------------------------------- */
 
-/* ---------- CONFIG ---------- */
-
-.training-config {
+.training__config {
   display: flex;
   justify-content: space-between;
   align-items: center;
-
   gap: 2rem;
 }
 
-
-/* ---------- CHARACTER GROUPS ---------- */
-
-.character-groups {
+/* Character checkboxes */
+.training__character-groups {
   display: flex;
   gap: 1.5rem;
 }
 
-.group-option {
+.training__group-option {
   display: flex;
   align-items: center;
   gap: 0.4rem;
-
   cursor: pointer;
-
   font-family: "Courier New", monospace;
   font-size: 0.85rem;
   letter-spacing: 1px;
 }
 
-.group-option input {
+.training__group-option input {
   accent-color: #111111;
+  cursor: pointer;
 }
 
-
-/* ---------- LENGTH ---------- */
-
-.length-control {
+/* Length selector */
+.training__length-control {
   display: flex;
   align-items: center;
   gap: 0.75rem;
-
   font-family: "Courier New", monospace;
   font-size: 0.85rem;
 }
 
-.length-control select {
+
+.training__length-select {
   background-color: #FEF7E6;
   border: 1px solid #111111;
-
   padding: 0.25rem 0.5rem;
-
   font-family: inherit;
+  cursor: pointer;
 }
 
+/* ---------------------------------
+   TRAINING INFO PANELS
+--------------------------------- */
 
-/* ---------- TRAINING INFO ---------- */
-
-.training-info {
+.training__info {
   display: flex;
   gap: 1rem;
 }
 
-.characters-block {
-  flex: 1;
-}
-
-.small-info-block {
-  width: 170px;
-  flex-shrink: 0;
-}
-
-.info-block {
+.training__info-block {
   border: 2px solid #111111;
-
   padding: 0.75rem;
-
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
 }
 
-.info-label {
+.training__info-block--main {
+  flex: 1;
+}
+
+.training__info-block--small {
+  width: 170px;
+  flex-shrink: 0;
+}
+
+.training__info-label {
   font-family: "Courier New", monospace;
   font-size: 0.75rem;
-
   text-transform: uppercase;
   letter-spacing: 1px;
-
   color: #555555;
 }
 
-.info-value {
+.training__info-value {
   font-family: "DM Serif Display", serif;
   font-size: 1.2rem;
-
   color: #111111;
 }
 
-.characters-display {
+.training__characters-display {
   letter-spacing: 4px;
-
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
-/* ---------- INPUT ---------- */
+/* ---------------------------------
+   USER INPUT TEXTAREA
+--------------------------------- */
 
-.training-input {
+.training__input {
   flex: 1;
-
   min-height: 0;
-
   resize: none;
-
   background: transparent;
   border: 2px solid #111111;
-
   padding: 1.5rem;
-
   outline: none;
-
   font-family: "Courier New", monospace;
   font-size: 1.3rem;
   line-height: 1.7;
-
   color: #111111;
 }
 
-.training-input::placeholder {
+.training__input::placeholder {
   color: #999999;
 }
 
+/* ---------------------------------
+   EVALUATION PANEL
+--------------------------------- */
 
-/* ---------- EVALUATION ---------- */
-
-.evaluation-panel {
+.training__evaluation {
   display: flex;
   gap: 1rem;
 }
 
-.evaluation-column {
+.training__evaluation-column {
   flex: 1;
-
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
 }
 
-.small-column {
+.training__evaluation-column--small {
   flex: 0.35;
 }
 
-.evaluation-label {
+.training__evaluation-label {
   font-family: "Courier New", monospace;
   font-size: 0.75rem;
-
   text-transform: uppercase;
   letter-spacing: 1px;
-
   color: #555555;
 }
 
-.evaluation-box {
+.training__evaluation-box {
   min-height: 70px;
-
   padding: 0.75rem;
-
   border: 1px solid #111111;
-
   font-family: "Courier New", monospace;
   font-size: 0.95rem;
-
   overflow-wrap: break-word;
 }
 
+/* ---------------------------------
+   FOOTER
+--------------------------------- */
 
-/* ---------- FOOTER ---------- */
-
-.training-footer {
+.training__footer {
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
 }
 
-
-/* ---------- DIVIDER ---------- */
-
-.footer-dashed {
+/* Dashed divider */
+.training__divider {
   width: 100%;
   border-top: 1px dashed rgba(17, 17, 17, 0.45);
 }
 
+/* ---------------------------------
+   CONTROL BUTTONS
+--------------------------------- */
 
-/* ---------- CONTROLS ---------- */
-
-.footer-controls {
+.training__controls {
   display: flex;
   justify-content: center;
   align-items: center;
-
   flex-wrap: wrap;
   gap: 1rem;
-
   padding-bottom: 0.5rem;
-
   font-family: "Courier New", monospace;
   font-size: 0.85rem;
   font-weight: 700;
-
   text-transform: uppercase;
   letter-spacing: 1px;
 }
 
-
-/* ---------- BUTTONS ---------- */
-
-.control-button {
+.training__control-btn {
   background-color: #FEF7E6;
   border: 2px solid #111111;
-
   padding: 0.45rem 0.9rem;
-
   cursor: pointer;
-
   font-family: inherit;
   font-size: inherit;
+  transition: background-color 0.15s ease;
 }
 
-.control-button:hover {
+.training__control-btn:hover {
   background-color: rgba(17, 17, 17, 0.05);
 }
 
-.control-button:active {
+.training__control-btn:active {
   transform: translateY(1px);
 }
 
+/* ---------------------------------
+   TIME CONTROL COMPONENT
+   (Matches all other pages)
+--------------------------------- */
 
-/* ---------- SLIDER ---------- */
+.time-control {
+  display: inline-flex;
+  align-items: center;
+  gap: 1rem;
+}
 
-.time-label,
-.time-unit-ms {
+.time-control__label,
+.time-control__unit {
   color: #555555;
 }
 
-.time-slider {
+.time-control__slider {
   width: 280px;
   height: 2px;
-
   appearance: none;
-
   background-color: #111111;
-
   cursor: pointer;
   outline: none;
 }
 
-.time-slider::-webkit-slider-thumb {
+/* WebKit browsers */
+.time-control__slider::-webkit-slider-thumb {
   appearance: none;
-
   width: 12px;
   height: 12px;
-
   background-color: #111111;
-
   cursor: pointer;
 }
 
-.time-slider::-moz-range-thumb {
+/* Firefox */
+.time-control__slider::-moz-range-thumb {
   width: 12px;
   height: 12px;
-
   border: none;
-
   background-color: #111111;
-
   cursor: pointer;
 }
 
-
-/* ---------- VALUE ---------- */
-
-.time-value {
+.time-control__value {
   min-width: 40px;
   text-align: center;
+  font-weight: 700;
 }

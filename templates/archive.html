@@ -1,25 +1,24 @@
 {% extends "layout.html" %}
 
 {% block content %}
-<section class="archives-page">
 
-  <!-- ===================== -->
-  <!-- TABLE VIEW            -->
-  <!-- ===================== -->
+<div class="archive">
 
-  <div class="archives-browser" id="archivesBrowser">
+  <!-- ================================
+       BROWSER VIEW - Table of archives
+       ================================ -->
 
-    <div class="archives-header">
-      <h2 class="archives-title">CLASSIFIED ARCHIVES</h2>
-      <p class="archives-subtitle">
+  <div class="archive__browser" id="archive-browser">
+
+    <div class="archive__header">
+      <h2 class="archive__title">CLASSIFIED ARCHIVES</h2>
+      <p class="archive__subtitle">
         decoded transmissions · mission logs · encrypted histories
       </p>
     </div>
 
-    <div class="archives-table-wrapper">
-
-      <table class="archives-table">
-
+    <div class="archive__table-wrapper">
+      <table class="archive__table">
         <thead>
           <tr>
             <th>TITLE</th>
@@ -29,118 +28,77 @@
             <th>CHARS</th>
           </tr>
         </thead>
-
         <tbody>
-
           {% for archive in archives %}
-
-          <tr
-            class="archive-row"
-            data-id="{{ archive.id }}"
-            data-title="{{ archive.title }}"
-            data-content="{{ archive.content }}"
-          >
-            <td class="entry-title">{{ archive.title }}</td>
-            <td class="entry-preview">{{ archive.description }}</td>
-            <td class="entry-meta">{{ archive.fictional_date }}</td>
-            <td class="entry-meta">{{ archive.tags }}</td>
-            <td class="entry-meta">{{ archive.length }}</td>
+          <tr class="archive__row" 
+              data-id="{{ archive.id }}"
+              data-title="{{ archive.title }}"
+              data-content="{{ archive.content }}">
+            <td class="archive__cell-title">{{ archive.title }}</td>
+            <td class="archive__cell-preview">{{ archive.description }}</td>
+            <td class="archive__cell-meta">{{ archive.fictional_date }}</td>
+            <td class="archive__cell-meta">{{ archive.tags }}</td>
+            <td class="archive__cell-meta">{{ archive.length }}</td>
           </tr>
-
           {% endfor %}
-
         </tbody>
-
       </table>
-
     </div>
 
-    <div class="archives-footer">
+    <div class="archive__footer-note">
       ✦ click any row to decode the full transmission ✦
     </div>
 
   </div>
 
+  <!-- ================================
+       READER VIEW - Single archive display
+       ================================ -->
 
-  <!-- ===================== -->
-  <!-- READER VIEW           -->
-  <!-- ===================== -->
+  <div class="archive__reader hidden" id="archive-reader">
 
-  <div class="archive-reader hidden" id="archiveReader">
-
-    <div class="reader-header">
-
-      <button
-        type="button"
-        class="reader-back-button"
-        id="readerBackButton"
-      >
+    <div class="archive__reader-header">
+      <button type="button" class="archive__back-btn" id="reader-back-btn">
         ← BACK
       </button>
-
-      <h2
-        class="reader-title"
-        id="readerTitle"
-      >
+      <h2 class="archive__reader-title" id="reader-title">
         Archive Title
       </h2>
-
     </div>
 
-    <div
-      class="reader-content"
-      id="readerContent"
-    >
+    <div class="archive__reader-content" id="reader-content">
       Archive content appears here.
     </div>
 
-    <div class="reader-footer">
+    <div class="archive__reader-footer">
+      <div class="archive__divider"></div>
 
-      <div class="footer-dashed"></div>
-
-      <div class="time-unit-control">
-
-        <button
-          id="playButton"
-          class="play-button"
-        >
+      <div class="time-control">
+        <button id="play-btn" class="time-control__play-btn" aria-label="Play morse code">
           ▶
         </button>
 
-        <span class="time-label">
-          TIME UNIT
-        </span>
+        <span class="time-control__label">TIME UNIT</span>
 
-        <input
-          type="range"
-          id="timeSlider"
-          class="time-slider"
-          min="100"
-          max="1000"
-          value="200"
-          step="50"
-        >
+        <input type="range"
+               id="time-slider"
+               class="time-control__slider"
+               min="100"
+               max="1000"
+               value="200"
+               step="50"
+               aria-label="Morse code time unit in milliseconds">
 
-        <span
-          id="timeValue"
-          class="time-value"
-        >
-          200
-        </span>
-
-        <span class="time-unit-ms">
-          ms
-        </span>
-
+        <span id="time-value" class="time-control__value">200</span>
+        <span class="time-control__unit">ms</span>
       </div>
-
     </div>
 
   </div>
 
-</section>
-{% endblock %}
+</div>
 
+{% endblock %}
 
 {% block links %}
 <link rel="stylesheet" href="/static/css/archive.css">

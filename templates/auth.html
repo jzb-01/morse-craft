@@ -6,138 +6,100 @@ Authentication
 
 {% block content %}
 
-<section class="auth-page">
+<div class="auth">
 
-  <div class="auth-header">
-
-    <h2 class="auth-title">
-      OPERATOR AUTHENTICATION
+  <div class="auth__header">
+    <h2 class="auth__title">
+      USER AUTHENTICATION
     </h2>
-
-    <p class="auth-subtitle">
-      access existing credentials or register a new operator
+    <p class="auth__subtitle">
+      access existing account or register a new one
     </p>
-
   </div>
+  
 
+  <div class="auth__container">
+    
+    <!-- Show flash messages if any -->
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <div class="auth__flash">
+          {% for message in messages %}
+            <p class="auth__flash-message">{{ message }}</p>
+          {% endfor %}
+        </div>
+      {% endif %}
+    {% endwith %}
 
-  <div class="auth-container">
-
-    <!-- LOGIN -->
-
-    <section class="auth-panel">
-
-      <h3 class="panel-title">
+    <!-- LOGIN PANEL -->
+    <div class="auth__panel">
+      <h3 class="auth__panel-title">
         SIGN IN
       </h3>
 
-      <form
-        action="/login"
-        method="post"
-        class="auth-form"
-      >
+      <form action="/login" method="post" class="auth__form">
+        <label class="auth__label">USERNAME</label>
+        <input type="text"
+               name="username"
+               class="auth__input"
+               autocomplete="username"
+               required>
 
-        <label>
-          USERNAME
-        </label>
+        <label class="auth__label">PASSWORD</label>
+        <input type="password"
+               name="password"
+               class="auth__input"
+               autocomplete="current-password"
+               required>
 
-        <input
-          type="text"
-          name="username"
-          autocomplete="username"
-          required
-        >
-
-        <label>
-          PASSWORD
-        </label>
-
-        <input
-          type="password"
-          name="password"
-          autocomplete="current-password"
-          required
-        >
-
-        <button type="submit">
+        <button type="submit" class="auth__button">
           LOGIN
         </button>
-
       </form>
+    </div>
 
-    </section>
+    <!-- VERTICAL DIVIDER -->
+    <div class="auth__divider"></div>
 
-
-    <!-- DIVIDER -->
-
-    <div class="auth-divider"></div>
-
-
-    <!-- REGISTER -->
-
-    <section class="auth-panel">
-
-      <h3 class="panel-title">
+    <!-- REGISTER PANEL -->
+    <div class="auth__panel">
+      <h3 class="auth__panel-title">
         REGISTER
       </h3>
 
-      <form
-        action="/register"
-        method="post"
-        class="auth-form"
-      >
+      <form action="/register" method="post" class="auth__form">
+        <label class="auth__label">USERNAME</label>
+        <input type="text"
+               name="username"
+               class="auth__input"
+               required>
 
-        <label>
-          USERNAME
-        </label>
+        <label class="auth__label">EMAIL</label>
+        <input type="email"
+               name="email"
+               class="auth__input"
+               required>
 
-        <input
-          type="text"
-          name="username"
-          required
-        >
+        <label class="auth__label">PASSWORD</label>
+        <input type="password"
+               name="password"
+               class="auth__input"
+               required>
 
-        <label>
-          EMAIL
-        </label>
-
-        <input
-          type="email"
-          name="email"
-          required
-        >
-
-        <label>
-          PASSWORD
-        </label>
-
-        <input
-          type="password"
-          name="password"
-          required
-        >
-
-        <button type="submit">
+        <button type="submit" class="auth__button">
           CREATE ACCOUNT
         </button>
-
       </form>
-
-    </section>
-
+    </div>
   </div>
 
-
-  <div class="auth-footer">
-
-    ✦ all transmissions are stored under your operator profile ✦
-
+  <div class="auth__footer">
+    ✦ all transmissions are stored under your profile ✦
   </div>
 
-</section>
+</div>
 
 {% endblock %}
-
 
 {% block links %}
 <link rel="stylesheet" href="/static/css/auth.css">

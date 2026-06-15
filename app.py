@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, session, redirect, jsonify, flash
 from flask_session import Session
 from werkzeug.security import generate_password_hash, check_password_hash
-from models import db, Archive, User, Note, Comment  # Updated to import Comment
+from models import db, Archive, User, Note, Comment
 from data import preview_table, letters, numbers, symbols
 import re
 

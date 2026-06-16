@@ -24,17 +24,17 @@ You can also experiment with the Codebook by clicking any row to hear the Morse 
 
 ### App Preview
 
-|           Home Page           |              Codebook              |
-| :---------------------------: | :--------------------------------: |
-| ![Home Page](assets/home.png) | ![Translator](assets/codebook.png) |
+|           Home Page           |             Codebook             |
+| :---------------------------: | :------------------------------: |
+| ![Home Page](assets/home.png) | ![Codebook](assets/codebook.png) |
 
-|                  Borwser                  |                  Reader                   |
-| :---------------------------------------: | :---------------------------------------: |
-| ![Home Page](assets/archives_browser.png) | ![Translator](assets/archives_reader.png) |
+|                      Browser                      |                     Reader                      |
+| :-----------------------------------------------: | :---------------------------------------------: |
+| ![Archvie's Browser](assets/archives_browser.png) | ![Archive's Reader](assets/archives_reader.png) |
 
 |             Auth              |              Translator              |
 | :---------------------------: | :----------------------------------: |
-| ![Home Page](assets/auth.png) | ![Translator](assets/translator.png) |
+| ![Auth Page](assets/auth.png) | ![Translator](assets/translator.png) |
 
 |             Telegraph              |             Training             |
 | :--------------------------------: | :------------------------------: |
@@ -197,7 +197,7 @@ Once running, open your web browser and navigate to: `http://127.0.0.1:5000`
 Through designing and developing this project, I gained practical, hands-on experience in:
 
 - **Full-Stack Web Development:** Building a complete Flask application with server-rendered templates, RESTful API endpoints, and modular client-side JavaScript.
-- **Web Audio API:** Generating and controlling real-time audio with OscillatorNode and GainNode, managing AudioContext lifecycle across multiple pages and user interactions.
+- **Web Audio API:** Generating and controlling real-time audio with OscillatorNode and GainNode, managing per-page AudioContext instances across user interactions.
 - **Database Design with SQLAlchemy:** Modeling entities with relationships, foreign keys, and server-side defaults, plus seeding databases with programmatically transformed data.
 - **Authentication Systems:** Implementing password hashing with Werkzeug, session management with Flask-Session, and route protection with proper HTTP status codes.
 - **Event-Driven UI Programming:** Handling complex input scenarios — mouse, keyboard, touch, and window focus events — with state machines for press tracking.

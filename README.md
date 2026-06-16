@@ -140,15 +140,21 @@ Morse-Craft uses a relational SQLite database managed through SQLAlchemy ORM.
 
 ```text
 morse-craft/
+├── assets/
+├── instance/
 ├── static/
 │   ├── css/
 │   └── js/
 ├── templates/
-├── instance/
+├── .gitignore
+├── LICENSE
+├── Procfile
+├── README.md
 ├── app.py
+├── data.py
 ├── models.py
-├── seed.py
-└── requirements.txt
+├── requirements.txt
+└── seed.py
 ````
 
 ---

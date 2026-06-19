@@ -103,11 +103,6 @@ leftBtn.addEventListener("click", async () => {
 // HELPER FUNCTIONS
 // ============================================================
 
-/**
- * Fetch a codebook section from the API
- * @param {string} section - "letters", "numbers", or "symbols"
- * @returns {Promise<Object|null>} Dictionary of char→morse or null on error
- */
 async function fetchCodebook(section) {
   try {
     const response = await fetch(`/api/codebook/${section}`);
@@ -120,10 +115,6 @@ async function fetchCodebook(section) {
   }
 }
 
-/**
- * Render a dictionary of characters to Morse code into the table
- * @param {Object} dictionary - { "A": ".-", "B": "-...", etc. }
- */
 function renderTable(dictionary) {
   tableBody.innerHTML = "";
 
@@ -142,11 +133,6 @@ function renderTable(dictionary) {
   }
 }
 
-/**
- * Load a codebook section and update the UI
- * @param {string} section - API endpoint name
- * @param {string} displayName - Title to show ("LETTERS", "NUMBERS", "SYMBOLS")
- */
 async function loadAndRender(section, displayName) {
   const data = await fetchCodebook(section);
   if (data) {

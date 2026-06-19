@@ -17,7 +17,7 @@ Try these workflows to explore the application:
 - **Translate a message:** Navigate to the **Translator** and type text in the left panel — watch it convert to Morse in real time.
 - **Send a telegraph:** Go to the **Telegraph** and click, hold the mouse, or press the spacebar to transmit dots and dashes with live audio feedback.
 - **Train your ear:** Open **Training**, select character groups, press START, and type what you hear to unlock new characters.
-- **Browse the archives:** Visit the **Archives** to explore classified transmissions and replay them as Morse audio.
+- **Browse the archive:** Visit the **Archive** to explore classified transmissions and replay them as Morse audio.
 - **Save your work:** Log in, tap out a message on the Telegraph, and save it as a personal note or post it to public Comments.
 
 You can also experiment with the Codebook by clicking any row to hear the Morse code for that character.
@@ -28,9 +28,9 @@ You can also experiment with the Codebook by clicking any row to hear the Morse 
 | :---------------------------: | :------------------------------: |
 | ![Home Page](assets/home.png) | ![Codebook](assets/codebook.png) |
 
-|                      Browser                      |                     Reader                      |
-| :-----------------------------------------------: | :---------------------------------------------: |
-| ![Archvie's Browser](assets/archives_browser.png) | ![Archive's Reader](assets/archives_reader.png) |
+|                     Browser                      |                     Reader                     |
+| :----------------------------------------------: | :--------------------------------------------: |
+| ![Archive's Browser](assets/archive_browser.png) | ![Archive's Reader](assets/archive_reader.png) |
 
 |             Auth              |              Translator              |
 | :---------------------------: | :----------------------------------: |
@@ -56,9 +56,9 @@ The platform combines translation tools, interactive training, a virtual telegra
 
 - **Real-Time Translation:** Instantly convert between text and Morse code with adjustable playback speed.
 - **Virtual Telegraph Key:** Transmit Morse code using mouse, keyboard, and touch input with real-time audio feedback.
-- **Progressive Training System:** Unlock new characters only after achieving high accuracy, creating a structured learning path.
+- **Progressive Learning Design:** Character-unlocking system that introduces new content based on user performance.
 - **Community Features:** Save private notes or share Morse messages publicly.
-- **Classified Archives:** Explore historical-style transmissions and replay them as Morse audio.
+- **Fictional Archive:** Explore historical-style transmissions and replay them as Morse audio.
 - **Shared Audio Utility:** A reusable Web Audio helper (beep) used across modules for consistent playback.
 
 ---
@@ -143,7 +143,7 @@ Morse-Craft uses a relational SQLite database managed through SQLAlchemy ORM.
 - Archive records are pre-seeded and serve as reusable training and exploration content.
 - SQLAlchemy handles relationships, constraints, and ORM-level database management.
 
-````
+---
 
 ## 📂 Project Structure
 
@@ -164,7 +164,7 @@ morse-craft/
 ├── models.py
 ├── requirements.txt
 └── seed.py
-````
+```
 
 ---
 
@@ -203,15 +203,15 @@ Open your browser at: `http://127.0.0.1:5000`
 
 - **Real-Time Telegraph Key:** Building a virtual telegraph key that classifies press duration into dots and dashes while supporting mouse, keyboard, and touch input, with smooth audio fade-in/out. Window blur events are used to safely reset input state when focus is lost.
 - **Morse Audio System:** Implementing a reusable Web Audio API beep utility shared across all modules, supporting live input, sequential playback, and training exercises.
-- **Progressive Training Logic:** Designing a character-unlocking system that introduces new symbols only after achieving 90%+ accuracy using position-by-position evaluation, while maintaining a shuffled character pool.
+- **Progressive Training Logic:** Designing a character-unlocking system that introduces new characters only after achieving 90%+ accuracy using position-by-position evaluation, while maintaining a shuffled character pool.
 - **Authentication & Authorization:** Managing session-based authentication with protected endpoints that return 401/403 responses where appropriate and conditionally rendering UI elements based on ownership.
-- **Content-as-Morse Architecture:** All stored content is represented as Morse code strings, requiring consistent encoding during seeding.
+- **Content-as-Morse Architecture:** All message content is stored as Morse code strings, requiring consistent encoding during seeding.
 
 ---
 
 ## 🧠 What I Learned
 
-- **Full-Stack Web Development:** Flask backend with REST APIs and modular ES module frontend architecture.
+- **Full-Stack Web Development:** Flask backend with JSON API endpoints
 - **Web Audio API:** Real-time sound generation using OscillatorNode and GainNode with controlled timing.
 - **SQLAlchemy ORM:** Modeling relational data with foreign keys and automated schema management.
 - **Authentication Systems:** Secure login using password hashing and session-based access control.

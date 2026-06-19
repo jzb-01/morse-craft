@@ -233,6 +233,6 @@ Open your browser at: `http://127.0.0.1:5000`
 
 - **License:** MIT
 - **Author:** Jordan Zarate
-- **Repository:** [https://github.com/jzb-01/morse-craft.git](https://github.com/jzb-01/morse-craft.git)
+- **Repository:** https://github.com/jzb-01/morse-craft
 
 ---
